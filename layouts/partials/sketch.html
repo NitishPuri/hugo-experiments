@@ -1,0 +1,43 @@
+{{ if .Params.use_p5 }}
+    <script src="/lib/p5/p5.min.js"></script>
+{{ end }}
+
+<script type="text/javascript">
+    // Args : {w, h, renderer, statsFunc}
+    function createCanvasCustom(opt = {}) {
+        opt.w = opt.w || windowWidth
+        opt.h = opt.h || windowHeight - 5
+        let cnv = createCanvas(opt.w, opt.h, opt.renderer)
+        cnv.parent('sketch-holder')
+        // let intervalId = showStats(opt.statsFunc)  // Maybe this should not be optional!!!
+        // cnv.intervalId = intervalId
+        return cnv
+    }
+    function showStats(func) {
+        let fr = createP()
+        fr.class('stats')
+        func = func || (() => "FPS : " + floor(frameRate()))
+        let intervalId = setInterval(() => {
+            fr.html(func())
+        }, 500)
+        let showFr = true;
+        document.addEventListener('keydown', (ev) => {
+            if (ev.key === 'f' || ev.key === 'F') {
+                if (showFr) fr.hide()
+                else fr.show()
+                showFr = !showFr
+            }
+        })
+        return intervalId
+
+    }
+    // Resolve the URL of resource located in data directory!!
+    function resolveUrl(url) {
+        // return '/ProcessingExperiments' + url
+        return url
+    }
+</script>
+
+{{ range $script := .Params.scripts }}
+    <script src="{{ $script }}"></script>
+{{ end }}

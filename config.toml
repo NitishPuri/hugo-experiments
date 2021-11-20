@@ -1,0 +1,28 @@
+BaseURL = "https://nitishpuri.github.io/blog-hugo/"
+languageCode = "en-us"
+title = "Blog - Nitish Puri"
+# theme = "mytheme"
+theme = "hugo-bootstrap-5"
+relativeURLS = true
+
+[params]
+author = "Nitish Puri"
+description = "These are some notes."
+logo = "https://www.mywebsite.com/images/logo.png"
+images = ["/images/site-feature-image.jpg"]
+
+[taxonomies]
+  tag = "tags"
+  category = "categories"
+
+
+# Google analytics
+googleAnalytics = "UA-1511XXXX-X"
+
+enableRobotsTXT = true
+
+[frontmatter]
+date = ["date", "publishDate", "lastmod"]
+lastmod = ["lastmod", ":fileModTime", ":default"]
+
+sectionPagesMenu = "main"
