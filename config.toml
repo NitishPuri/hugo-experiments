@@ -1,4 +1,4 @@
-BaseURL = "https://nitishpuri.github.io/blog-hugo/"
+BaseURL = "https://nitishpuri.gitlab.io/"
 languageCode = "en-us"
 title = "Blog - Nitish Puri"
 # theme = "mytheme"
