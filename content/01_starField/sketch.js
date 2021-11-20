@@ -13,9 +13,10 @@ function setup() {
     stars[i] = new Star();
   }
 
-  // const gui = new dat.GUI();
-  // gui.add(params, 'speed').min(-50).max(50);
-
+  const gui = new dat.GUI();
+  gui.add(params, 'speed').min(1).max(100);
+  console.log(gui)
+     
   colorMode(HSB, 100, 100, 100, 100)
 }
 
@@ -29,4 +30,11 @@ function draw() {
     s.show();
   })
 
+}
+
+function mousePressed() {  
+  if (mouseX > 0 && mouseX < 100 && mouseY > 0 && mouseY < 100) {
+    let fs = fullscreen();
+    fullscreen(!fs);
+  }
 }
