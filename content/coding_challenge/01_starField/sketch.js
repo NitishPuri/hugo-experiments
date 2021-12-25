@@ -1,6 +1,7 @@
 
 var params = {
   speed: 10,
+  background_opacity: 30
 }
 
 let stars = [];
@@ -14,14 +15,14 @@ function setup() {
   }
 
   const gui = new dat.GUI();
-  gui.add(params, 'speed').min(1).max(100);
-  console.log(gui)
+  gui.add(params, 'speed').min(5).max(50);
+  gui.add(params, 'background_opacity').min(10).max(50);
      
   colorMode(HSB, 100, 100, 100, 100)
 }
 
 function draw() {
-  background(0)
+  background(0, 0, 0, params.background_opacity)
 
   translate(width / 2, height / 2)
 

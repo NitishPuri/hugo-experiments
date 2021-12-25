@@ -2,7 +2,7 @@
 layout: sketch
 use_p5: true
 libs: [dat.gui.min.js]
-tags: ["sketch"]
+tags: ["p5"]
 scripts: 
     - star.js
     - sketch.js
