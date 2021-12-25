@@ -7,10 +7,13 @@ class Cell {
     this.dead = false
   }
 
-  move() {
+  move(velocityMultiplier, vibrationMultiplier) {
     if(this.pos.x > width || this.pos.x < 0) this.v.x *= -1
-    if(this.pos.y > height || this.pos.y < 0) this.v.y *= -1
-    this.pos.add(this.v);
+    if(this.pos.y > height || this.pos.y < 0) this.v.y *= -1    
+    this.pos.add([this.v.x * velocityMultiplier, this.v.y * velocityMultiplier]);    
+    let vibrations = p5.Vector.random2D()
+    vibrations.mult(vibrationMultiplier)
+    this.pos.add(vibrations);
   }
 
   show() {
