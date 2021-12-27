@@ -1,6 +1,6 @@
 BaseURL = "https://nitishpuri.gitlab.io/"
 languageCode = "en-us"
-title = "Blog - Nitish Puri"
+title = "Code/Art - Nitish Puri"
 # theme = "mytheme"
 theme = "hugo-bootstrap-5"
 relativeURLS = true
