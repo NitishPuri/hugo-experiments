@@ -2,7 +2,7 @@
 layout: sketch
 use_p5: true
 libs: [dat.gui.min.js]
-tags: ["p5", "showcase"]
+tags: ["p5", "showcase", "coding-challenge", "algorithms"]
 scripts: 
     - cell.js
     - sketch.js
