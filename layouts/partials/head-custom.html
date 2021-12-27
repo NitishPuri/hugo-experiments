@@ -10,3 +10,7 @@
 {{ if .Params.use_p5 }}
     {{ partial "sketch.html" .}}
 {{ end }}
+
+{{ range $lib := .Params.libs }}
+    <script src="/lib/{{ $lib }}"></script>
+{{ end }}
