@@ -5,24 +5,25 @@
 <script type="text/javascript">
     // Args : {w, h, renderer, statsFunc}
     function createCanvasCustom(opt = {}) {
-        let sketch_holder = select('#sketch-holder');
-        opt.w = opt.w || sketch_holder.width
-        opt.h = opt.h || windowHeight - 60
+        
+        var sketch_holder_id = "sketch-holder";        
+        
+        let sketch_holder = select('#' + sketch_holder_id);
+        opt.w = opt.w || window.innerWidth
+        opt.h = opt.h || windowHeight
         let cnv = createCanvas(opt.w, opt.h, opt.renderer)
-        cnv.parent('sketch-holder')
+        cnv.parent(sketch_holder_id)
         return cnv
     }
     function windowResized() {
         let canvas = select('.p5Canvas');
         if(fullscreen()) {
-            canvas.parent('sketch-holder-fs')
             resizeCanvas(window.innerWidth, window.innerHeight)
             document.body.scrollTop = 0
             document.body.style.overflow = 'hidden';
         } else {
-            canvas.parent('sketch-holder')
             let sketch_holder = select('#sketch-holder');
-            resizeCanvas(sketch_holder.width, windowHeight - 60)
+            resizeCanvas(sketch_holder.width, windowHeight)
             document.body.style.overflow = 'visible';
         }
     }
@@ -42,7 +43,6 @@
             }
         })
         return intervalId
-
     }
     // Resolve the URL of resource located in data directory!!
     function resolveUrl(url) {
