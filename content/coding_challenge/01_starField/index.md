@@ -2,11 +2,11 @@
 layout: sketch
 use_p5: true
 libs: [dat.gui.min.js]
-tags: ["p5", "coding-challenge"]
+tags: ["p5", "coding-challenge", "2019"]
 scripts: 
     - star.js
     - sketch.js
-title: Coding Challenge#01 -- StarField
+title: StarField
 ---
 
 A simple particle system taking advantage of the perspective divide to show warping effect through the starfield.

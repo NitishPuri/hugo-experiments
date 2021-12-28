@@ -6,5 +6,5 @@ tags: ["p5", "coding-challenge"]
 scripts: 
     - drop.js
     - sketch.js
-title: Coding Challenge#04 -- Purple Rain
+title: Purple Rain
 ---

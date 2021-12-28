@@ -1,9 +1,13 @@
 class Cell {
-  constructor(pos, r, c) {
+  constructor(pos, r, h, s, b) {
     this.pos = pos || createVector(random(width), random(height));
     this.r = r || 60;
     this.v =  p5.Vector.random2D();
-    this.c = c || color(random(100, 255), random(0, 100), random(100, 255), 100)
+
+    this.cellHue = h || random(cellHue - 40, cellHue + 40)
+    this.cellSat = s || random(100 , 255)
+    this.cellVal = b || random(200, 255)
+    this.color = color(this.cellHue , this.cellSat, this.cellVal, 100)
     this.dead = false
   }
 
@@ -18,7 +22,7 @@ class Cell {
 
   show() {
     noStroke();
-    fill(this.c)
+    fill(this.color)
     ellipse(this.pos.x, this.pos.y, this.r)
   }
 
@@ -31,7 +35,7 @@ class Cell {
     if (random(100) <[probMitosis] && this.r > 1) {
       let offset = p5.Vector.random2D();
       offset.setMag(this.r);
-      let cell = new Cell(this.pos.copy().add(offset), this.r * 0.8, this.c)
+      let cell = new Cell(this.pos.copy().add(offset), this.r * 0.8, this.cellHue, this.cellSat, this.cellVal)
       this.r /= 2;
       return cell;
     }

@@ -6,7 +6,7 @@ tags: ["p5", "showcase", "coding-challenge", "nature"]
 scripts: 
     - cell.js
     - sketch.js
-title: Coding Challenge#6 -- Mitosis
+title: Mitosis
 ---
 
 <https://en.wikipedia.org/wiki/Mitosis>
