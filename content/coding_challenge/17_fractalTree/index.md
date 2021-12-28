@@ -1,7 +1,5 @@
 ---
 layout: sketch
-use_p5: true
-libs: [dat.gui.min.js]
 tags: ["p5", "coding-challenge", "fractal"]
 scripts: 
     - Branch.js

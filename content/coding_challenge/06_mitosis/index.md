@@ -1,7 +1,5 @@
 ---
 layout: sketch
-use_p5: true
-libs: [dat.gui.min.js]
 tags: ["p5", "showcase", "coding-challenge", "nature", "2018"]
 scripts: 
     - cell.js

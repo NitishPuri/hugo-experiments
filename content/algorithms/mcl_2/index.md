@@ -1,15 +1,11 @@
 ---
 layout: sketch
-use_p5: true
 tags: ["p5", "algorithms", "robotics", "2018"]
-libs:    
-    - dat.gui.min.js
 scripts: 
     - sketch.js
     - robot.js
     - helper.js
 title: Monte Carlo Localization(MCL) - v2
-use_math: true
 ---
 
 ***In Progress***

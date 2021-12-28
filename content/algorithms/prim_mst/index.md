@@ -1,11 +1,8 @@
 ---
 layout: sketch
-use_p5: true
-use_math: true
 tags: ["p5", "showcase", "algorithms", "2018"]
 libs:
     - custom/heap.js
-    - dat.gui.min.js
 scripts: 
     - sketch.js
 title: Prim's Minimum Spanning Tree
