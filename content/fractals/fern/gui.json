@@ -1,0 +1,256 @@
+{
+  "preset": "Fishbone Fern",
+  "presets": {
+    "Barnsley Fern": {
+      "extents": {
+        "xMin": -4.5,
+        "xMax": 7,
+        "yMin": -2,
+        "yMax": 11
+      },
+      "transforms": [
+        {
+          "a": 0,
+          "b": 0,
+          "c": 0,
+          "d": 0.16,
+          "e": 0,
+          "f": 0,
+          "p": 0.01,
+          "color": 0
+        },
+        {
+          "a": 0.85,
+          "b": 0.04,
+          "c": -0.04,
+          "d": 0.85,
+          "e": 0,
+          "f": 1.60,
+          "p": 0.85,
+          "color": 25
+        },
+        {
+          "a": 0.20,
+          "b": -0.26,
+          "c": 0.23,
+          "d": 0.22,
+          "e": 0,
+          "f": 1.60,
+          "p": 0.07,
+          "color": 50
+        },
+        {
+          "a": -0.15,
+          "b": 0.28,
+          "c": 0.26,
+          "d": 0.24,
+          "e": 0,
+          "f": 0.44,
+          "p": 0.07,
+          "color": 75
+        }
+      ]
+    },
+    "Culcita Fern": {
+      "extents": {
+        "xMin": -4.5,
+        "xMax": 7,
+        "yMin": -1,
+        "yMax": 7
+      },
+      "transforms": [
+        {
+          "a": 0,
+          "b": 0,
+          "c": 0,
+          "d": 0.25,
+          "e": 0,
+          "f": -0.14,
+          "p": 0.02,
+          "color": 0
+        },
+        {
+          "a": 0.85,
+          "b": 0.02,
+          "c": -0.02,
+          "d": 0.83,
+          "e": 0,
+          "f": 1,
+          "p": 0.84,
+          "color": 25
+        },
+        {
+          "a": 0.09,
+          "b": -0.28,
+          "c": 0.3,
+          "d": 0.11,
+          "e": 0,
+          "f": 0.60,
+          "p": 0.07,
+          "color": 50
+        },
+        {
+          "a": -0.09,
+          "b": 0.28,
+          "c": 0.3,
+          "d": 0.09,
+          "e": 0,
+          "f": 0.7,
+          "p": 0.07,
+          "color": 75
+        }
+      ]
+    },
+    "Fishbone Fern": {
+      "extents": {
+        "xMin": -4.5,
+        "xMax": 7,
+        "yMin": -1,
+        "yMax": 7
+      },
+      "transforms": [
+        {
+          "a": 0,
+          "b": 0,
+          "c": 0,
+          "d": 0.25,
+          "e": 0,
+          "f": -0.4,
+          "p": 0.02,
+          "color": 0
+        },
+        {
+          "a": 0.95,
+          "b": 0.002,
+          "c": -0.002,
+          "d": 0.93,
+          "e": -0.002,
+          "f": 0.5,
+          "p": 0.84,
+          "color": 25
+        },
+        {
+          "a": 0.035,
+          "b": -0.11,
+          "c": 0.27,
+          "d": 0.01,
+          "e": -0.05,
+          "f": 0.005,
+          "p": 0.07,
+          "color": 50
+        },
+        {
+          "a": -0.04,
+          "b": 0.11,
+          "c": 0.27,
+          "d": 0.01,
+          "e": 0.047,
+          "f": 0.06,
+          "p": 0.07,
+          "color": 75
+        }
+      ]
+    },
+    "Cyclosorus Fern": {
+      "extents": {
+        "xMin": -4.5,
+        "xMax": 7,
+        "yMin": -2,
+        "yMax": 11
+      },
+      "transforms": [
+        {
+          "a": 0,
+          "b": 0,
+          "c": 0,
+          "d": 0.25,
+          "e": 0,
+          "f": -0.4,
+          "p": 0.02,
+          "color": 0
+        },
+        {
+          "a": 0.95,
+          "b": 0.005,
+          "c": -0.005,
+          "d": 0.93,
+          "e": -0.002,
+          "f": 0.5,
+          "p": 0.84,
+          "color": 25
+        },
+        {
+          "a": 0.035,
+          "b": -0.2,
+          "c": 0.16,
+          "d": 0.04,
+          "e": -0.09,
+          "f": 0.02,
+          "p": 0.07,
+          "color": 50
+        },
+        {
+          "a": -0.04,
+          "b": 0.2,
+          "c": 0.16,
+          "d": 0.04,
+          "e": 0.09,
+          "f": 0.12,
+          "p": 0.07,
+          "color": 75
+        }
+      ]
+    }
+  },
+  "remembered": {
+    "Default": {
+      "0": {
+        "n": 5,
+        "ratio": 0.5,
+        "restriction": 4
+      }
+    },
+    "Fern": {
+      "0": {
+        "speed": 1000,
+        "alpha": 60,
+        "background": 10,
+        "perturb": false
+      }
+    }
+  },
+  "closed": false,
+  "folders": {
+    "Extents": {
+      "preset": "Default",
+      "closed": true,
+      "folders": {}
+    },
+    "Transforms": {
+      "preset": "Default",
+      "closed": true,
+      "folders": {
+        "Transform1": {
+          "preset": "Default",
+          "closed": true,
+          "folders": {}
+        },
+        "Transform2": {
+          "preset": "Default",
+          "closed": true,
+          "folders": {}
+        },
+        "Transform3": {
+          "preset": "Default",
+          "closed": true,
+          "folders": {}
+        },
+        "Transform4": {
+          "preset": "Default",
+          "closed": true,
+          "folders": {}
+        }
+      }
+    }
+  }
+}

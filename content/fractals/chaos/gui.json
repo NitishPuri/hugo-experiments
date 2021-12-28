@@ -1,0 +1,65 @@
+{
+  "preset": "Serpinski Triangle",
+  "presets": {
+    "Serpinski Triangle": {
+      "n": 3,
+      "ratio": 0.5,
+      "restriction": "0"
+    },
+    "Square 1": {
+      "n": 4,
+      "ratio": 0.5,
+      "restriction": "1"
+    },
+    "Square 2": {
+      "n": 4,
+      "ratio": 0.5,
+      "restriction": "2"
+    },
+    "Square 3": {
+      "n": 4,
+      "ratio": 0.5,
+      "restriction": "3"
+    },
+    "Square 4": {
+      "n": 4,
+      "ratio": 0.5,
+      "restriction": "4"
+    },
+    "Square 5": {
+      "n": 4,
+      "ratio": 0.5,
+      "restriction": "5"
+    },
+    "Pentagon 1": {
+      "n": 5,
+      "ratio": 0.5,
+      "restriction": "1"
+    },
+    "Pentagon 2": {
+      "n": 5,
+      "ratio": 0.5,
+      "restriction": "2"
+    },
+    "Pentagon 3": {
+      "n": 5,
+      "ratio": 0.5,
+      "restriction": "3"
+    },
+    "Pentagon 4": {
+      "n": 5,
+      "ratio": 0.5,
+      "restriction": "4"
+    },
+    "Pentagon 5": {
+      "n": 5,
+      "ratio": 0.5,
+      "restriction": "5"
+    },
+    "Pentagon 6": {
+      "n": 5,
+      "ratio": 0.5,
+      "restriction": "5"
+    }
+  }
+}
