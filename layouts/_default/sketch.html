@@ -1,9 +1,15 @@
+
+{{ define "head-custom-block" }}
+    {{ partial "mathjax_support.html" . }}
+    {{ partial "sketch-p" . }}
+{{ end }}
+
+
 {{ define "header" }}
 <!--empty-->
 {{ end }}
 
 {{ define "main" }}
-
 <header>
     {{ partial "post-title" . }}
     {{ partial "post-date" . }}

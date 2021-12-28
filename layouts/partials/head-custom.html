@@ -3,15 +3,9 @@
     {{- partial "articleschema.html" .  -}}
 {{ end }}
 
-<!-- Math support-->
-{{ if or .Params.mathjax .Params.use_math }}{{ partial "mathjax_support.html" . }}{{ end }}
-
 {{ range $lib := .Params.libs }}
     <script src="/lib/{{ $lib }}"></script>
 {{ end }}
 
-<!-- p5 sketch -->
-{{ if .Params.use_p5 }}
-    {{ partial "sketch.html" .}}
-{{ end }}
+
 
