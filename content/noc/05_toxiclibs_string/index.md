@@ -1,5 +1,6 @@
 ---
 layout: sketch
+tags: ["p5", "noc", "physics", "toxiclibs.js"]
 libs : 
     - toxiclibs.js
     - toxichelper.js
