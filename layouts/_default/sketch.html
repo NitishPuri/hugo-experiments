@@ -1,0 +1,24 @@
+{{ define "header" }}
+<!--empty-->
+{{ end }}
+
+{{ define "main" }}
+
+<header>
+    {{ partial "post-title" . }}
+    {{ partial "post-date" . }}
+    {{ partial "post-tags" . }}
+    {{ partial "post-categories" . }}
+    <hr>
+</header>
+<article class="blog-post">
+
+    {{ .TableOfContents }}
+    
+    {{ .Content }}
+
+    {{ partial "translations.html" . }}
+    {{ partial "related" . }}
+</article>
+
+{{ end }}
