@@ -1,10 +1,7 @@
 ---
 layout: sketch
-use_p5: true
-use_math: true
-tags: ["p5", "noc"]
-libs :
-    - dat.gui.min.js
+tags: ["p5", "noc", "physics", "box-2d"]
+libs :    
     - box2d-html5.js
     - box2d-helper.js
 scripts : 
