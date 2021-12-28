@@ -1,6 +1,6 @@
 ---
 layout: sketch
-tags: ["p5", "coding-challenge", "fractal"]
+tags: ["p5", "coding-challenge", "fractals"]
 scripts: 
     - Branch.js
     - Tree.js
