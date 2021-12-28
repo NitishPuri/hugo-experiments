@@ -8,6 +8,8 @@ scripts:
 title: Reaction Diffusion
 ---
 
+**Coding Challenge#13**
+
 [Karl Sims Tutorial](http://karlsims.com/rd.html)   
 
 * Port to WebGL.

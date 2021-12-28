@@ -9,4 +9,6 @@ scripts:
 title: Maze Generator
 ---
 
+**Coding Challenge#10**
+
 <https://en.wikipedia.org/wiki/Maze_generation_algorithm#Recursive_backtracker>
