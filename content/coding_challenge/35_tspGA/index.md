@@ -1,6 +1,7 @@
 ---
 layout: sketch
 tags: ["p5", "coding-challenge", "algorithms"]
+date: "2018-04-02"
 scripts: 
     - ga.js
     - sketch.js

@@ -1,6 +1,7 @@
 ---
 layout: sketch
-tags: ["p5", "showcase", "coding-challenge", "2018"]
+tags: ["p5", "showcase", "coding-challenge", "perlin-noise"]
+date: "2018-02-02"
 scripts: 
     - particle.js
     - sketch.js    

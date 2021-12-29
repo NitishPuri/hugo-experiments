@@ -1,6 +1,7 @@
 ---
 layout: sketch
-tags: ["p5", "coding-challenge", "2018"]
+tags: ["p5", "coding-challenge"]
+date: "2018-01-31"
 scripts: 
     - drop.js
     - sketch.js

@@ -1,6 +1,7 @@
 ---
 layout: sketch
-tags: ["p5", "showcase", "coding-challenge", "nature", "2018"]
+tags: ["p5", "showcase", "coding-challenge", "nature"]
+date: "2018-02-10"
 scripts: 
     - cell.js
     - sketch.js

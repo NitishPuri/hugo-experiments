@@ -1,6 +1,7 @@
 ---
 layout: sketch
 tags: ["p5", "coding-challenge", "nature", "showcase"]
+date: "2018-01-29"
 scripts: [sketch.js]
 title: Phyllotaxis
 ---
