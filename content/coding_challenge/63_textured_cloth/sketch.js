@@ -9,7 +9,7 @@ const w = 20;
 const h = 20;
 
 function preload() {
-  pimg = loadImage(resolveUrl('/data/tex/l_8_f_14.jpg'),
+  pimg = loadImage(resolveUrl('/data/l_8_f_14.jpg'),
     () => console.log("Image loaded"),
     () => console.log("Image load failed"))
 }

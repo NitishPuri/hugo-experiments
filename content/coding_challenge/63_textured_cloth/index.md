@@ -1,5 +1,7 @@
 ---
 layout: sketch
+tags: ["p5", "coding-challenge", "physics"]
+date: "2018-05-08"
 libs : 
     - toxiclibs.js
     - toxichelper.js
@@ -8,6 +10,8 @@ scripts :
     - connection.js
     - blanket.js
     - sketch.js
-title: Coding Challenge#63 -- Textured Cloth Simulation
+title: Textured Cloth Simulation
 ---
+
+**Coding Challenge#63**
 

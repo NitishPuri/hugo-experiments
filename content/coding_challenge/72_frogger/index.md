@@ -1,6 +1,6 @@
 ---
 layout: sketch
-tags: ["p5", "coding-challenge", "robotics"]
+tags: ["p5", "coding-challenge", "game"]
 date: "2018-05-08"
 scripts: 
     - rectangle.js  
@@ -8,7 +8,7 @@ scripts:
     - lane.js
     - frog.js  
     - sketch.js
-title: Minesweeper
+title: Frogger
 ---
 
 **Coding Challenge#72**
