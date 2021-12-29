@@ -1,6 +1,9 @@
 
 {{ define "head-custom-block" }}
-    {{ partial "mathjax_support.html" . }}
+    {{ partial "mathjax_support.html" . }}    
+    {{ range $lib := .Params.libs }}
+        <script src="/lib/{{ $lib }}"></script>
+    {{ end }}
     {{ partial "sketch-p" . }}
 {{ end }}
 
@@ -17,9 +20,10 @@
     {{ partial "post-categories" . }}
     <hr>
 </header>
+
 <article class="blog-post">
 
-    {{ .TableOfContents }}
+    {{ .TableOfContents }}    
     
     {{ .Content }}
 
