@@ -1,6 +1,7 @@
 ---
 layout: sketch
 tags: ["p5", "noc", "automata"]
+date: "2018-01-27"
 scripts: 
     - GOL.js
     - Cell.js

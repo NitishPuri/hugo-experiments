@@ -1,6 +1,7 @@
 ---
 layout: sketch
 tags: ["p5", "noc"]
+date: "2018-01-27"
 scripts: 
     - dna.js
     - obstacle.js

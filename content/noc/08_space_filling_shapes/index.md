@@ -1,6 +1,7 @@
 ---
 layout: sketch
 tags: ["p5", "noc", "fractals"]
+date: "2018-01-27"
 libs: 
     - custom/geom.js
 scripts: 
