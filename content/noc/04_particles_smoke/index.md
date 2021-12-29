@@ -1,6 +1,7 @@
 ---
 layout: sketch
 tags: ["p5", "noc", "particle-system"]
+date: "2018-02-03"
 scripts : 
     - particle.js
     - particleSystem.js

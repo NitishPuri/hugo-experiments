@@ -5,6 +5,7 @@ libs:
     - custom/heap.js    
 scripts:  
     - sketch.js
+date: "2018-07-07"
 title: Kruskal's Minimum Spanning Tree
 ---
 

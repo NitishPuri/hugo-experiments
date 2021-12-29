@@ -4,6 +4,7 @@ tags: ["p5", "algorithms", "robotics", "2018"]
 scripts: 
     - sketch.js
     - robot.js
+date: "2018-04-30"
 title: Monte Carlo Localization(MCL)
 ---
 Also known as particle filter localization, is an algorithm for robots to localize using a particle filter.   

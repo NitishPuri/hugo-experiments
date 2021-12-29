@@ -5,6 +5,7 @@ scripts:
     - sketch.js
     - robot.js
     - helper.js
+date: "2018-10-02"
 title: Monte Carlo Localization(MCL) - v2
 ---
 

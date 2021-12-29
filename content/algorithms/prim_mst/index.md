@@ -5,6 +5,7 @@ libs:
     - custom/heap.js
 scripts: 
     - sketch.js
+date: "2018-04-30"
 title: Prim's Minimum Spanning Tree
 ---
 
