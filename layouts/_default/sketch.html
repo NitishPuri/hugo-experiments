@@ -1,10 +1,13 @@
 
 {{ define "head-custom-block" }}
     {{ partial "mathjax_support.html" . }}    
+    {{ partial "sketch-p" . }}
     {{ range $lib := .Params.libs }}
         <script src="/lib/{{ $lib }}"></script>
     {{ end }}
-    {{ partial "sketch-p" . }}
+    {{ range $lib := .Params.libs_url }}
+        <script src="{{ $lib }}"></script>
+    {{ end }}
 {{ end }}
 
 
