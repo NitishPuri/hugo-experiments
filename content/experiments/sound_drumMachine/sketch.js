@@ -59,7 +59,7 @@ function preload() {
     '/data/make_sound/OS_SNARE05.wav',
     '/data/make_sound/OS_SNARE06.wav',
   ].map(s => ({
-    sound: loadSound(s),
+    sound: loadSound(resolveUrl(s)),
     name: (/[.]*OS_(.*)\.wav/g).exec(s)[1],
     pattern: [],
     phrase: new p5.Phrase(name, (time) => {
