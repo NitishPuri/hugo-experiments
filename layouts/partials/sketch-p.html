@@ -50,10 +50,8 @@ crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     function resolveUrl(url) {
         // return '/ProcessingExperiments' + url
         if(document.location.origin === "https://nitishpuri.gitlab.io") {
-            console.log("/hugo-experiments" + url)
             return "/hugo-experiments" + url
-        }        
-        console.log(url)
+        }
         return url
     }
 </script>
