@@ -1,6 +1,6 @@
 ---
 layout: sketch
-tags: ["p5", "coding-challenge", "algorithms"]
+tags: ["coding-challenge", "algorithms", "geometry"]
 date: "2018-02-08"
 scripts: 
     - circle.js

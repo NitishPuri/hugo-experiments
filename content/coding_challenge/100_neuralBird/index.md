@@ -1,6 +1,6 @@
 ---
 layout: sketch
-tags: ["p5", "coding-challenge", "neural-networks"]
+tags: [ "coding-challenge", "neural-networks"]
 date: "2018-04-03"
 libs:
     - custom/nn.js

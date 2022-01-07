@@ -1,7 +1,7 @@
 ---
 layout: sketch
 scripts: [sketch.js]
-tags: ["p5", "experiments", "magenta"]
+tags: [ "experiments", "magenta"]
 title: Quick, Draw! Dataset
 ---
 

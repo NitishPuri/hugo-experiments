@@ -1,6 +1,6 @@
 ---
 layout: sketch
-tags: ["p5", "coding-challenge", "geometry"]
+tags: ["coding-challenge", "geometry"]
 date: "2018-02-02"
 scripts: [sketch.js]
 title: Supershapes in 3D

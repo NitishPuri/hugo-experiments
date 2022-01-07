@@ -1,6 +1,6 @@
 ---
 layout: sketch
-tags: ["p5", "coding-challenge", "algorithms"]
+tags: ["coding-challenge", "algorithms", "genetic_algorithm"]
 date: "2018-04-02"
 scripts: 
     - ga.js

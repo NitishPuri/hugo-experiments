@@ -1,6 +1,6 @@
 ---
 layout: sketch
-tags: ["p5", "coding-challenge", "nature", "showcase"]
+tags: ["coding-challenge", "nature", "showcase"]
 date: "2018-02-06"
 scripts: [sketch.js]
 title: Poisson Disk Sampling

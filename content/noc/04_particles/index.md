@@ -1,6 +1,6 @@
 ---
 layout: sketch
-tags: ["p5", "noc"]
+tags: [ "noc"]
 scripts : 
     - particle.js
     - particleSystem.js

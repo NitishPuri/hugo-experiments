@@ -1,6 +1,6 @@
 ---
 layout: sketch
-tags: ["p5", "noc", "automata"]
+tags: [ "noc", "automata"]
 date: "2018-01-27"
 scripts: 
     - GOL.js

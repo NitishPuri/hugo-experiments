@@ -4,7 +4,7 @@ libs:
     - p5/p5.sound.min.js
 scripts: 
     - sketch.js
-tags: ["p5", "music"]    
+tags: [ "music"]    
 title: Drum Machine
 ---
 

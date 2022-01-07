@@ -9,7 +9,7 @@ scripts:
     - nn.js
     - simple-boundary.js
     - sketch.js
-tags: ["p5", "experiments", "ml", 'debug_this']
+tags: [ "experiments", "ml", 'debug_this']
 title: Walking Neurons
 ---
 Neuroevolution for walking agents.

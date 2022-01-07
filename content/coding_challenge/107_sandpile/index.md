@@ -1,6 +1,6 @@
 ---
 layout: sketch
-tags: ["p5", "coding-challenge"]
+tags: ["coding-challenge", "algorithms", "explore_more"]
 date: "2018-04-03"
 scripts: 
     - quadtree.js

@@ -2,7 +2,7 @@
 layout: shader
 fragShader: frag.glsl
 title: Creation by Silexars
-tags: ["p5", "shaders"]    
+tags: [ "shaders"]    
 ---
 
 ## Resources

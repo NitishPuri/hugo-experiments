@@ -2,7 +2,7 @@
 layout: shader
 fragShader: frag.glsl
 title: Algorithmic Square Shapes
-tags: ["p5", "shaders"]    
+tags: [ "shaders"]    
 ---
 
 Square-shaped shaders.

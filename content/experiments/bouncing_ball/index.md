@@ -1,7 +1,7 @@
 ---
 layout: sketch
 scripts: [sketch.js]
-tags: ["p5", "experiments"]
+tags: [ "experiments"]
 date: "2018-01-31"
 title: Bouncing Ball
 ---

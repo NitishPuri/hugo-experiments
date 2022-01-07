@@ -5,6 +5,6 @@ libs:
 scripts: 
     - sketch.js
     - brushes.js
-tags: ["p5", "music"]    
+tags: [ "music"]    
 title: Sound painter
 ---

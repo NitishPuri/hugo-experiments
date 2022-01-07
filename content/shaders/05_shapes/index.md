@@ -3,7 +3,7 @@ layout: shader
 scripts: [sketch.js]
 fragShader: frag.glsl
 title: Algorithmic Shapes
-tags: ["p5", "shaders"]    
+tags: [ "shaders"]    
 ---
 
 Some simple(and some weird) mathematical shaping and blending functions. 

@@ -1,7 +1,7 @@
 ---
 layout: shader
 fragShader: frag.glsl
-tags: ["p5", "shaders"]    
+tags: [ "shaders"]    
 title: Algorithmic Circles
 ---
 

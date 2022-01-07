@@ -2,7 +2,7 @@
 layout: shader-ed
 fragShader: untitled.glsl
 title: Shader Test!!
-tags: ["p5", "shaders"]    
+tags: [ "shaders"]    
 ---
 
 Source :: [Raymarching - Diffuse Reflection](https://www.shadertoy.com/view/XtXXR7)

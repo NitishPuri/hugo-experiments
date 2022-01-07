@@ -1,6 +1,6 @@
 ---
 layout: sketch
-tags: ["p5", "coding-challenge", "algorithms"]
+tags: ["coding-challenge", "algorithms", "math"]
 date: "2018-05-08"
 scripts: 
     - squareTiling.js

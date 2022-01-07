@@ -1,6 +1,6 @@
 ---
 layout: sketch
-tags: ["p5", "coding-challenge", "physics"]
+tags: [ "coding-challenge", "physics"]
 date: "2018-05-08"
 libs : 
     - toxiclibs.js

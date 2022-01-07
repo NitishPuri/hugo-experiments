@@ -3,7 +3,7 @@ layout: shader
 scripts: [sketch.js]
 fragShader: frag.glsl
 title: Color Spaces
-tags: ["p5", "shaders"]    
+tags: [ "shaders"]    
 ---
 
 ## Resources

@@ -3,7 +3,7 @@ layout: sketch
 scripts: 
     - sketch.js    
 title: Video Slit Scan
-tags: ["p5", "camera"]    
+tags: [ "camera"]    
 ---
 
 [An Informal Catalogue of Slit-Scan Video Artworks and Research](http://www.flong.com/texts/lists/slit_scan/)    

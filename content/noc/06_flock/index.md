@@ -1,6 +1,6 @@
 ---
 layout: sketch
-tags: ["p5", "noc", "flocking"]
+tags: [ "noc", "flocking"]
 date: "2018-01-27"
 scripts: 
     - boid.js

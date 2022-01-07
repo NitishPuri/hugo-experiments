@@ -1,6 +1,6 @@
 ---
 layout: sketch
-tags: ["p5", "coding-challenge", "webgl"]
+tags: ["coding-challenge", "webgl"]
 date: "2018-02-02"
 scripts: 
     - blob.js

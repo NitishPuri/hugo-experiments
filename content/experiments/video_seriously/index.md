@@ -7,7 +7,7 @@ libs :
 scripts: 
     - sketch.js    
 title: Video Seriously
-tags: ["p5", "camera"]    
+tags: [ "camera"]    
 ---
 
 

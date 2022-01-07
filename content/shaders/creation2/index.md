@@ -2,7 +2,7 @@
 layout: shader
 fragShader: frag.glsl
 title: Am I doing it right? by Silexars
-tags: ["p5", "shaders"]    
+tags: [ "shaders"]    
 ---
 
 ## Resources

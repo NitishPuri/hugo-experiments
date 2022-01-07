@@ -3,7 +3,7 @@ layout: sketch
 scripts: 
     - sketch.js    
 title: Video CheckBox effect
-tags: ["p5", "camera"]    
+tags: [ "camera"]    
 ---
 
 <style>

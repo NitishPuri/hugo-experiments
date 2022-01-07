@@ -1,6 +1,6 @@
 ---
 layout: sketch
-tags: ["p5", "noc", "physics", "box-2d"]
+tags: [ "noc", "physics", "box-2d"]
 date: "2018-01-27"
 libs :
     - box2d-html5.js

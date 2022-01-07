@@ -2,7 +2,7 @@
 layout: shader
 fragShader: frag.glsl
 title: Raymarching - Diffuse Reflection
-tags: ["p5", "shaders"]    
+tags: [ "shaders"]    
 ---
 
 Source :: [Raymarching - Diffuse Reflection][https://www.shadertoy.com/view/XtXXR7]

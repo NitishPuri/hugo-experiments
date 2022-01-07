@@ -1,6 +1,6 @@
 ---
 layout: sketch
 scripts: [sketch.js]
-tags: ["p5", "experiments"]
+tags: [ "experiments"]
 title: Random Shapes
 ---

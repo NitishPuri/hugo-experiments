@@ -1,6 +1,6 @@
 ---
 layout: sketch
-tags: ["p5", "coding-challenge", "particle-system"]
+tags: ["coding-challenge", "particle-system"]
 date: "2018-02-04"
 scripts: 
     - firework.js

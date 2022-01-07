@@ -1,6 +1,6 @@
 ---
 layout: sketch
-tags: ["p5", "noc"]
+tags: [ "noc"]
 scripts: 
     - sketch.js
 date: "2018-01-27"    

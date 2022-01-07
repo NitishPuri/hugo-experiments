@@ -1,6 +1,6 @@
 ---
 layout: sketch
-tags: ["p5", "noc", "physics", "flocking", "showcase"]
+tags: [ "noc", "physics", "flocking", "showcase"]
 date: "2018-01-27"
 scripts: 
     - vehicle.js

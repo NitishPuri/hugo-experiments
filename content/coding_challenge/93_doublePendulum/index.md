@@ -1,6 +1,6 @@
 ---
 layout: sketch
-tags: ["p5", "coding-challenge", "physics"]
+tags: [ "coding-challenge", "physics"]
 date: "2018-04-03"
 scripts: 
     - sketch.js

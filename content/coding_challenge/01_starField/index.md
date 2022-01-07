@@ -1,6 +1,6 @@
 ---
 layout: sketch
-tags: ["p5", "coding-challenge"]
+tags: ["coding-challenge", "showcase"]
 date: "2018-05-18"
 scripts: 
     - star.js

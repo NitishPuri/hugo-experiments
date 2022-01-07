@@ -1,6 +1,6 @@
 ---
 layout: sketch
-tags: ["p5", "coding-challenge", "game"]
+tags: [ "coding-challenge", "game"]
 date: "2018-05-08"
 scripts: 
     - rectangle.js  
