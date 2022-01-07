@@ -5,10 +5,10 @@
     <script type="text/javascript" src="https://rawgit.com/patriciogonzalezvivo/glslCanvas/master/dist/GlslCanvas.js"></script>
     <script src="/lib/dat.gui.min.js"></script>
 
-    <!--Add scripts-->
+    <!--Add scripts-->    
     {{ range $script := .Params.scripts }}
     <script src="{{ $script }}"></script>
-    {{ end }}
+    {{ end }}    
         
     <script id="frag-shader" src="{{ .Params.fragShader }}" type="not-javascript"></script>    
     
