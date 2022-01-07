@@ -1,0 +1,71 @@
+
+{{ define "head-custom-block" }}
+    {{ partial "mathjax_support.html" . }}        
+
+    <script type="text/javascript" src="https://rawgit.com/patriciogonzalezvivo/glslCanvas/master/dist/GlslCanvas.js"></script>
+    <link type="text/css" rel="stylesheet" href="https://rawgit.com/patriciogonzalezvivo/glslEditor/gh-pages/build/glslEditor.css">
+    <script type="application/javascript" src="https://rawgit.com/patriciogonzalezvivo/glslEditor/gh-pages/build/glslEditor.js"></script>
+    <script src="/lib/dat.gui.min.js"></script>
+
+    <!--Add scripts-->    
+    {{ range $script := .Params.scripts }}
+    <script src="{{ $script }}"></script>
+    {{ end }}    
+        
+    <script id="frag-shader" src="{{ .Params.fragShader }}" type="not-javascript"></script>    
+    
+    <script type="text/javascript">
+        let glslEditor;
+        function loadEditor() {
+            glslEditor = new GlslEditor('#sketch-holder', {
+                canvas_size: 500,
+                canvas_draggable: true,
+                theme: 'monokai',
+                multipleBuffers: true,
+                watchHash: true,
+                fileDrops: true,
+                menu: true
+            });
+
+            let url_string = window.location;
+            let url = new URL(url_string);
+            let c = url.searchParams.get('shaderSource');
+            if (c == null || c == undefined) {
+                c = url.pathname + 'frag.glsl'
+            }
+            c = url.origin + c;
+            fetch(c)
+                .then(res => res.text())
+                .then(text => glslEditor.setContent(text));
+        }
+        window.addEventListener('load', loadEditor)
+    </script>
+{{ end }}
+
+
+{{ define "header" }}
+<!--empty-->
+{{ end }}
+
+{{ define "main" }}
+
+<a class="editorLink" id="openInEditor">Edit Shader</a>
+
+<header>
+    {{ partial "post-title" . }}
+    {{ partial "post-date" . }}
+    {{ partial "post-tags" . }}
+    {{ partial "post-categories" . }}
+    <hr>
+</header>
+
+<article class="blog-post">
+
+    {{ .TableOfContents }}    
+    
+    {{ .Content }}
+
+    {{ partial "translations.html" . }}
+    {{ partial "related" . }}
+</article>
+{{ end }}
