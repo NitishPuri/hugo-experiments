@@ -1,6 +1,6 @@
 ---
 layout: sketch
-tags: ["p5", "algorithms", "robotics", "2018"]
+tags: ["algorithms", "localization"]
 scripts: 
     - sketch.js
     - robot.js

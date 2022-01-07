@@ -1,6 +1,6 @@
 ---
 layout: sketch
-tags: ["p5", "showcase", "algorithms", "2018"]
+tags: ["showcase", "algorithms", "graphs"]
 libs:
     - custom/heap.js    
 scripts:  
