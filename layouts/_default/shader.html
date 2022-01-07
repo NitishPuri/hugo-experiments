@@ -1,0 +1,89 @@
+
+{{ define "head-custom-block" }}
+    {{ partial "mathjax_support.html" . }}        
+
+    <script type="text/javascript" src="https://rawgit.com/patriciogonzalezvivo/glslCanvas/master/dist/GlslCanvas.js"></script>
+    <script src="/lib/dat.gui.min.js"></script>
+
+    <!--Add scripts-->
+    {{ range $script := .Params.scripts }}
+    <script src="{{ $script }}"></script>
+    {{ end }}
+        
+    <script id="frag-shader" src="{{ .Params.fragShader }}" type="not-javascript"></script>    
+    
+    <script type="text/javascript">
+        let sandbox, canvas;
+        function createCanvasCustom(opt = {}) {
+            canvas = document.createElement("canvas")
+            canvas.style.width = '100vw';
+            canvas.style.height = '100vh';
+            let scale = window.devicePixelRatio;
+            document.getElementById('sketch-holder').appendChild(canvas)
+
+            sandbox = new GlslCanvas(canvas);
+
+            sandbox.reset = function () {
+                this.uniform('2f', 'vec2', 'u_resolution', this.canvas.width, this.canvas.height);
+            }
+            sandbox.reset();
+            loadShader();
+
+            // setup editor link
+            let editorLink = document.getElementById('openInEditor');
+            editorLink.onclick = () => {
+                let base_url = window.location.href.match(/^(.*\/source\/)/g)[0];
+                let url = new URL(base_url + 'experiments/Shaders/ShaderEditor');
+                console.log(document.getElementById('frag-shader').src)
+                let shader_url = new URL(document.getElementById('frag-shader').src);
+                console.log(shader_url.pathname)
+                url += '?shaderSource=' + shader_url.pathname;
+                window.open(url)
+                return true;
+            }
+
+            //! Call setup function to set up any custom behaviour if defined
+            if (window.setup) {
+                setup();
+            }
+        }
+
+        function loadShader() {
+            //! Use a custom compile function if defined.
+            //! Otherwise just map to identity.
+            let compile = window.compile || ((a) => a);
+            fetch(document.getElementById('frag-shader').src)
+                .then(res => res.text())
+                .then(text => sandbox.load(compile(text)))
+        }
+        window.addEventListener('load', createCanvasCustom)
+    </script>
+{{ end }}
+
+
+{{ define "header" }}
+<!--empty-->
+{{ end }}
+
+{{ define "main" }}
+
+<a class="editorLink" id="openInEditor">Edit Shader</a>
+
+<header>
+    {{ partial "post-title" . }}
+    {{ partial "post-date" . }}
+    {{ partial "post-tags" . }}
+    {{ partial "post-categories" . }}
+    <hr>
+</header>
+
+<article class="blog-post">
+
+    {{ .TableOfContents }}    
+    
+    {{ .Content }}
+
+    {{ partial "translations.html" . }}
+    {{ partial "related" . }}
+</article>
+{{ end }}
