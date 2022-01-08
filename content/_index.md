@@ -1,3 +1,10 @@
+---
+outputs:
+  - html
+  - rss
+  - json
+---
+
 ## Uses
 * Hugo
 * [p5.js](https://p5js.org/)
