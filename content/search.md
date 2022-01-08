@@ -11,6 +11,9 @@ menu:
 
 ---
 
+Added as described here,  
+[https://gist.github.com/eddiewebb/735feb48f50f0ddd65ae5606a1cb41ae#layouts---default-indexjson]
+
 
 This file exists solely to respond to /search URL with the related `search` layout template.
 
