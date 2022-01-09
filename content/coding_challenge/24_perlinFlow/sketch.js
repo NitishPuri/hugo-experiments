@@ -37,6 +37,8 @@ var particles = [];
 
 var flowField = [];
 
+var capturer = new Recorder();
+
 function setup() {
   createCanvasCustom({
     statsFunc: () =>
@@ -58,6 +60,9 @@ function setup() {
   gui.add(params, 'zIncrement').min(0.001).max(0.1);
   gui.add(params, 'lod').min(0).max(20);
   gui.add(params, 'falloff').min(0.01).max(1);
+
+  gui.add(capturer, "start")
+  gui.add(capturer, "stop")
 
   params.reset();
   // params.changeColorMode();
@@ -132,6 +137,9 @@ function draw() {
   if (params.dynamicField) {
     params.zOff += params.zIncrement;
   }
+
+  capturer.capture()
+
 }
 
 function mouseDragged() {
