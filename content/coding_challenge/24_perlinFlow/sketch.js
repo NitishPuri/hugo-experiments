@@ -37,7 +37,7 @@ var particles = [];
 
 var flowField = [];
 
-var capturer = new Recorder();
+var capturer; //= new Recorder2();
 
 function setup() {
   createCanvasCustom({
@@ -61,11 +61,13 @@ function setup() {
   gui.add(params, 'lod').min(0).max(20);
   gui.add(params, 'falloff').min(0.01).max(1);
 
+  capturer = new Recorder2()
   gui.add(capturer, "start")
   gui.add(capturer, "stop")
 
   params.reset();
   // params.changeColorMode();
+
 
   // background(255)
 }
