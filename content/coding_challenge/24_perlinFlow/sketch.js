@@ -37,8 +37,6 @@ var particles = [];
 
 var flowField = [];
 
-var capturer; //= new Recorder2();
-
 function setup() {
   createCanvasCustom({
     statsFunc: () =>
@@ -61,7 +59,7 @@ function setup() {
   gui.add(params, 'lod').min(0).max(20);
   gui.add(params, 'falloff').min(0.01).max(1);
 
-  capturer = new Recorder2()
+  let capturer = new Recorder_Web()
   gui.add(capturer, "start")
   gui.add(capturer, "stop")
 
@@ -139,8 +137,6 @@ function draw() {
   if (params.dynamicField) {
     params.zOff += params.zIncrement;
   }
-
-  capturer.capture()
 
 }
 

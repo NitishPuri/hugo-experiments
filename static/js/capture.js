@@ -1,5 +1,5 @@
 
-class Recorder {        
+class Recorder_CC {        
     constructor() {
         console.log("Recorder created.")
         this.ccapturer = new CCapture({format: 'webm', frameRate: 30})
@@ -17,69 +17,20 @@ class Recorder {
     }
 }
 
-
-function handleSourceOpen(event) {
-    console.log('MediaSource opened');
-    sourceBuffer = mediaSource.addSourceBuffer('video/webm; codecs="vp8"');
-    console.log('Source buffer: ', sourceBuffer);
-}
-
-function handleStop(event) {
-    console.log('Recorder stopped: ', event);
-    const superBuffer = new Blob(recordedBlobs, {type: 'video/webm'});
-    // video.src = window.URL.createObjectURL(superBuffer);
-}
-
-function handleDataAvailable(event) {
-    if (event.data && event.data.size > 0) {
-      recordedBlobs.push(event.data);
-    }
-}
-  
-
-const mediaSource = new MediaSource();
-mediaSource.addEventListener('sourceopen', handleSourceOpen, false);
 let mediaRecorder;
-let recordedBlobs;
-let sourceBuffer;
-
-function stopRecording() {
-    mediaRecorder.stop();
-    console.log('Recorded Blobs: ', recordedBlobs);
-    // video.controls = true;
-  }
-
-  function download() {
-    const blob = new Blob(recordedBlobs, {type: 'video/webm'});
-    const url = window.URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.style.display = 'none';
-    a.href = url;
-    a.download = 'test.webm';
-    document.body.appendChild(a);
-    a.click();
-    setTimeout(() => {
-      document.body.removeChild(a);
-      window.URL.revokeObjectURL(url);
-    }, 100);
-  }
-
-
-class Recorder2 {        
+class Recorder_Web {        
     constructor() {
-        // console.log("Recorder created.")
-        // this.ccapturer = new CCapture({format: 'webm', frameRate: 30})
         const canvas = document.getElementById('defaultCanvas0');
         var stream = canvas.captureStream(); // frames per second
         this.stream = stream
         console.log('Started stream capture from canvas element: ', stream);
+        this.recordedBlobs = []        
     }
+    
     start() {                
-        // console.log("Recorder started.")
-        // this.ccapturer.start();
-
+        console.log("Recorder started.")
         let options = {mimeType: 'video/webm'};
-        recordedBlobs = [];
+        this.recordedBlobs = [];
         try {
           mediaRecorder = new MediaRecorder(this.stream, options);
         } catch (e0) {
@@ -105,8 +56,15 @@ class Recorder2 {
         // recordButton.textContent = 'Stop Recording';
         // playButton.disabled = true;
         // downloadButton.disabled = true;
-        mediaRecorder.onstop = handleStop;
-        mediaRecorder.ondataavailable = handleDataAvailable;
+        mediaRecorder.onstop = (event) => {
+            console.log('Recorder stopped: ', event);
+            const superBuffer = new Blob(this.recordedBlobs, {type: 'video/webm'});        
+        }
+        mediaRecorder.ondataavailable = (event) => {
+            if (event.data && event.data.size > 0) {
+                this.recordedBlobs.push(event.data);
+              }
+        };
         mediaRecorder.start(100); // collect 100ms of data
         console.log('MediaRecorder started', mediaRecorder);
 
@@ -114,11 +72,30 @@ class Recorder2 {
     capture() {
         // this.ccapturer.capture(document.getElementById('defaultCanvas0'))
     }
+    stopRecording() {
+        mediaRecorder.stop();
+        console.log('Recorded Blobs: ', this.recordedBlobs);
+        // video.controls = true;
+    }
+    
+    download() {
+        const blob = new Blob(this.recordedBlobs, {type: 'video/webm'});
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.style.display = 'none';
+        a.href = url;
+        a.download = 'test.webm';
+        document.body.appendChild(a);
+        a.click();
+        setTimeout(() => {
+            document.body.removeChild(a);
+            window.URL.revokeObjectURL(url);
+        }, 100);
+    }
+    
     stop() {
-        // this.ccapturer.stop();
-        // this.ccapturer.save();
-        stopRecording()
-        download()
+        this.stopRecording()
+        this.download()
     }
 }
 
