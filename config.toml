@@ -1,4 +1,4 @@
-BaseURL = "https://nitishpuri.gitlab.io/"
+baseURL = "https://nitishpuri.gitlab.io"
 languageCode = "en-us"
 title = "Code/Art - Nitish Puri"
 # theme = "mytheme"
@@ -17,10 +17,10 @@ images = ["/images/site-feature-image.jpg"]
 
 
 # Google analytics
-googleAnalytics = "UA-1511XXXX-X"
+googleAnalytics = "G-52F9VYD18Q"
 
 enableRobotsTXT = true
-
+  
 [frontmatter]
 date = ["date", "publishDate", "lastmod"]
 lastmod = ["lastmod", ":fileModTime", ":default"]

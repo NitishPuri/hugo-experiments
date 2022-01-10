@@ -14,3 +14,8 @@ outputs:
 * [Toxiclibs.js](http://haptic-data.com/toxiclibsjs/)    
 * [Matter.js](http://brm.io/matter-js/)
 * [CCapture.js](github.com/spite/ccapture.js)
+
+* Recording functionality using samples at:
+webrtc.github.io/samples/src/content/capture/canvas-record/
+https://github.com/webrtc/samples/blob/gh-pages/src/content/capture/canvas-record/js/main.js
+
