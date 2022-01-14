@@ -1,0 +1,26 @@
+{
+  "name": "p5_hugo",
+  "version": "1.0.0",
+  "description": "Hugo based blog source.",
+  "main": "index.js",
+  "dependencies": {
+    "express": "^4.17.2",
+    "nodemon": "^2.0.15",
+    "request": "^2.88.2",
+    "ws": "^8.4.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon scripts/server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://gitlab.com/nitishpuri/hugo-experiments.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://gitlab.com/nitishpuri/hugo-experiments/issues"
+  },
+  "homepage": "https://gitlab.com/nitishpuri/hugo-experiments#readme"
+}

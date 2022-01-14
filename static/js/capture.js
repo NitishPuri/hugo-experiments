@@ -97,6 +97,13 @@ class Recorder_Web {
         this.stopRecording()
         this.download()
     }
+
+    connect() {
+      const ws = new WebSocket('ws://192.168.1.9:3030');
+      ws.onopen = () => {
+        console.log('Now connected');
+      };
+    }
 }
 
 

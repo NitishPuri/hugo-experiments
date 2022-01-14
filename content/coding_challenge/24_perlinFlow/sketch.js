@@ -62,6 +62,7 @@ function setup() {
   let capturer = new Recorder_Web()
   gui.add(capturer, "start")
   gui.add(capturer, "stop")
+  gui.add(capturer, "connect")
 
   params.reset();
   // params.changeColorMode();
