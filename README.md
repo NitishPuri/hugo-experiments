@@ -3,6 +3,7 @@ Hugo based blog source.
 
 ## Local development server
 hugo server --bind=192.168.1.9 --baseURL=http://192.168.1.9:1313
+hugo server --bind=192.168.1.14 --baseURL=http://192.168.1.14:1313
 
 ## Using 
 * [p5.js](https://p5js.org/)
