@@ -1,66 +1,59 @@
-// const { json } = require('express/lib/response');
-// const ws = require('ws')
-// const fs = require('fs')
-
-// const socketServer = new ws.Server({ port: 3030 })
-// socketServer.on('connection', (socketClient) => {
-//     console.log('connected');
-//     console.log('client Set length: ', socketServer.clients.size);
-//     socketClient.on('close', (socketClient) => {
-//         console.log('closed');
-//         console.log('Number of clients: ', socketServer.clients.size);
-//     });
-
-//     socketClient.on('message', (message) => {
-//         console.log("received a message " + message)
-//         console.log("received a message " + message.data)
-//         console.log("received a message " + message.type)
-//         // let blob = new Blob(message)
-//         // console.log("received a message " + blob)
-//         // fs.writeFileSync('image.png', message, 'image/png   ')
-        
-//     })
-//     // socketClient.on('')
-// });
-
-// console.log(socketServer)
-
 let express = require('express')
 let socket = require('socket.io')
 let fs = require('fs')
 
+// Create express app and server.
 let app = express();
-
 app.get('/', (req, res) => {
     res.send('Hello World!')
 })
-
+// app.use(express.static('public'))
 var server = app.listen(3000, () => {
     var host = server.address().address;
     var port = server.address().port;
     console.log('Example app listening at http://' + host + ':' + port);
 })
 
-// app.use(express.static('public'))
-
+// Create web socket
 var io = socket(server, {
     cors: {origin: '*'},
     maxHttpBufferSize: 1e8
 });
+
+// Twitter Support
+const { TwitterApi } = require('twitter-api-v2');
+var twitter_config = require('./config.js')
+const twitterClient = new TwitterApi(twitter_config)
+
 io.sockets.on('connection', (s) => {
   console.log('new connection ' + s.id)
 
   s.on('image', (data) => {
-    // s.broadcast.emit('mouse', data)
     console.log("received a message " + data)
     console.log("received a message " + data.data)
   })
+
   s.on('imageCapture', (data) => {
-    // s.broadcast.emit('mouse', data)
+
     console.log("received a message " + data)
-    console.log("received a message " + data.size)
-    console.log("received a message " + data.mimeType)
-    fs.writeFileSync('image.jpeg', data.data, 'base64')
+    console.log("Image size %d MB" , data.size / (1024*1024))
+    console.log("Image type " , data.mimeType)
+    console.log("Image Caption: ", data.caption)
+
+    fs.mkdirSync('temp')
+    var filename = 'temp/image.jpeg'+ Date.now()
+    fs.writeFileSync(filename, data.data, 'base64')    
+
+    const mediaIds = await Promise.all([
+      twitterClient.v1.uploadMedia('./' + filename)
+    ])
+
+    await twitterClient.v1.tweet(data.caption, { media_ids: mediaIds })
   })
 })
+
+
+
+
+
 
