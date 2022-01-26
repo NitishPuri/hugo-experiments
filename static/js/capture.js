@@ -111,13 +111,20 @@ class Recorder_Web {
     canvas.toBlob((blob) => {
       console.log("Sending image.")
       let data = {
-        data: blob,
+        imageData: blob,
         size: blob.size,
-        mimeType: "image/png"
+        mimeType: "image/jpeg",
+        caption: "Perlin noise flow field.",
+        sketch: "PerlinNoise"
       };
       console.log("Sending message with blob of size, %s MB", blob.size / (1024 * 1024))
       this.socket.emit('imageCapture', data)
     }, 'image/jpeg')
+  }
+
+  repost() {
+    console.log("Post to IG")
+    this.socket.emit('repost')
   }
 
   downloadImage(filename) {

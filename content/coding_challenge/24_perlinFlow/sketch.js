@@ -65,6 +65,7 @@ function setup() {
   gui.add(capturer, "start")
   gui.add(capturer, "stop")
   gui.add(capturer, "capture")
+  gui.add(capturer, "repost")
 
   params.reset();
   // params.changeColorMode();

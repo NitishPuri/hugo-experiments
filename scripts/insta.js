@@ -5,7 +5,7 @@ var baseUrl = 'https://graph.facebook.com/v12.0/';
 class FB {    
     pages = config.page;
     insta = config.insta;
-    
+
     async get(endpoint, params) {
         const url = baseUrl + endpoint;
         console.log("Fetching : ", url);
@@ -32,49 +32,59 @@ class FB {
     getPage = (page) => this.getNode(page)
     getPermissions = () => this.get('me/permissions')
     getAccounts = () => this.get(`${config.userId}/accounts`)
-}
 
-// Instagram Support
-function createIGMedia(config, imageURL, caption) {
-    const containerCreationURL = 'https://graph.facebook.com/' + config.userId + '/media?';
-    console.log(imageURL)
-    console.log(containerCreationURL)
-    request.post({
-        url: containerCreationURL,
-        form: {
-            image_url: imageURL,
-            access_token: config.accessToken,
-            caption: caption,
-        },
-    }, (error, response, body) => {
-        const bodyObj = JSON.parse(body);
-        const mediaContainerID = bodyObj.id;
-        // console.log("Error : ", error)
-        // console.log("Response : ", response)
-        console.log("Body : ", bodyObj)
-        console.log(`IG Media Container ID ${mediaContainerID}`);
-        if(mediaContainerID !== null) {
-            // publishMediaContainer(mediaContainerID, config)
+    async createIGMedia(ig_user_id, imageURL, caption) {
+        const containerCreationURL =  `${baseUrl + ig_user_id}/media`;
+        console.log(imageURL)
+        console.log(containerCreationURL)
+        try {
+            const response = await axios.post(containerCreationURL, {
+                image_url: imageURL,
+                access_token: config.accessToken,
+                caption: caption
+            });
+            console.log(`Response from : ${containerCreationURL} : ${response.status}`)            
+            console.log(response.data)
+            console.log(`IG Media Container ID : ${response.data.id}`)
+            return response.data.id;
+        } catch (error) {
+            console.error(error);
         }
-    })
-}
+    }   
 
-async function getAccessToken(config) {
-    const accessTokenURL = 'http://graph.facebook.com/v12.0/oauth/access_token?';
-    const response = await axios.post()
-    request.post({
-        url: accessTokenURL,
-        form: {
-            grant_type: 'fb_exchange_token',
-            client_id: config.appId,
-            client_secret: config.appSecret,
-            fb_exchange_token: config.accessToken
-        },
-    }, (error, response, body) => {
-        // const bodyObj 
-    })
-}
+    async publishIGmedia(ig_user_id, creation_id) {
+        const publishURL = `${baseUrl + ig_user_id}/media_publish`;
+        console.log(publishURL)
+        try {
+            const response = await axios.post(publishURL, {
+                access_token: config.accessToken,
+                creation_id: creation_id
+            })
+            console.log(`Response from : ${publishURL} : ${response.status}`);
+            console.log(response.data)
+            return response;
+        } catch (error) {
+            console.error(error);
+        }
+    }
 
+    async getAccessToken(config) {
+        const accessTokenURL = 'http://graph.facebook.com/v12.0/oauth/access_token?';
+        const response = await axios.post()
+        request.post({
+            url: accessTokenURL,
+            form: {
+                grant_type: 'fb_exchange_token',
+                client_id: config.appId,
+                client_secret: config.appSecret,
+                fb_exchange_token: config.accessToken
+            },
+        }, (error, response, body) => {
+            // const bodyObj 
+        })
+    }
+    
+}
 
 // const gcsImagePath = 'https://storage.googleapis.com/generative-art-1/PerlinNoise_1642871786851.jpg';
 // createIGMedia(config.facebook, gcsImagePath, "Test Media")
