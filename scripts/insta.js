@@ -3,10 +3,10 @@ var config = require('./config.js').facebook;
 
 var baseUrl = 'https://graph.facebook.com/v12.0/';
 class FB {    
-    pages = config.page;
+    pages = config.pages;
     insta = config.insta;
 
-    async get(endpoint, params) {
+    async get(endpoint, params = {}) {
         const url = baseUrl + endpoint;
         console.log("Fetching : ", url);
         params['access_token'] = config.accessToken;
@@ -62,7 +62,48 @@ class FB {
             })
             console.log(`Response from : ${publishURL} : ${response.status}`);
             console.log(response.data)
-            return response;
+            return response.data.id;
+        } catch (error) {
+            console.error(error);
+        }
+    }
+
+    async commentOnMedia(ig_media_id, comment) {
+        const commentURL = `${baseUrl + ig_media_id}/comments`
+        setTimeout(() => {
+            const response = axios.post(commentURL, {
+                access_token: config.accessToken,
+                message: comment
+            })
+        }, 1000);
+    }
+
+    async publishFBFeed(fb_page, message) {
+        const page_post_url = `${baseUrl + fb_page.id}/feed`
+        try {
+            const response = await axios.post(page_post_url, {
+                access_token: fb_page.accessToken,
+                message: message
+            })
+            console.log(`Posted to page [${fb_page.id}] with status [${response.status}] `)
+            console.log(`Post id : [${response.data.id}]`)
+            return response.data.id;
+        } catch (error) {
+            console.error(error);
+        }
+    }
+
+    async publishFBPhoto(fb_page, image_url) {
+        const page_post_url = `${baseUrl + fb_page.id}/photos`
+        try {
+            const response = await axios.post(page_post_url, {
+                access_token: fb_page.accessToken,
+                url: image_url                
+            })
+            console.log(`Posted photo to page [${fb_page.id}] with status [${response.status}] `)
+            console.log(`Post id : [${response.data.post_id}]`)
+            console.log(`Photo id : [${response.data.id}]`)
+            return response.data;
         } catch (error) {
             console.error(error);
         }
@@ -85,18 +126,5 @@ class FB {
     }
     
 }
-
-// const gcsImagePath = 'https://storage.googleapis.com/generative-art-1/PerlinNoise_1642871786851.jpg';
-// createIGMedia(config.facebook, gcsImagePath, "Test Media")
-// getUser(config.facebook, config.facebook.userId)
-// getUser(config.facebook, 'me')
-// getUser(config.facebook, 'me/permissions')
-// getUser(config.facebook, 'me/permissions')
-// getUser(config.facebook, `${config.facebook.userId}/accounts`)
-// var rsponse1 = getUser(config.facebook, `${config.facebook.insta.printsh}`, 'id,name,biography,username')
-// var response2 = getUser(config.facebook, `${config.facebook.userId}`)
-// getIGUser(config.facebook, `${config.facebook.userId}`)
-// getIGUser(config.facebook, config.facebook.userId)
-// getIGUser(config.facebook, config.facebook.page.ccStudioId)
 
 module.exports = FB;

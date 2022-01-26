@@ -56,6 +56,9 @@ io.sockets.on('connection', (connection) => {
     const ig_creation_id = await fb.createIGMedia(fb.insta.printsh, gcsImagePath, data.caption);
     const publish_response = await fb.publishIGmedia(fb.insta.printsh, ig_creation_id);
     console.log("Image publish response from to insta : ", publish_response.status);
+
+    const fb_post = await fb.publishFBPhoto(fb.pages.ccStudio, gcsImagePath);
+
   })
 
   connection.on('repost', () => {
