@@ -4,7 +4,7 @@ const express = require('express')
 const socket = require('socket.io')
 const fs = require('fs');
 const request = require('request');
-const { FB, Twitter, GCS } = require('./insta.js');
+const { FB, Twitter, GCS } = require('./social.js');
 
 const fb = new FB;
 const twitter = new Twitter()
