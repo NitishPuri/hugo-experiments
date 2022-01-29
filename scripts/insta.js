@@ -12,7 +12,7 @@ class FB {
         params['access_token'] = config.accessToken;
         try {
             const response = await axios.get(url, {params: params});
-            console.log(`Response from ${url} : ${response.status}`);
+            console.log(`Response from : ${url} : ${response.status} , ${response.statusText}`);
             console.log(response.data);
             return response;
         } catch (error) {
@@ -68,14 +68,31 @@ class FB {
         }
     }
 
-    async commentOnMedia(ig_media_id, comment) {
+    async listIGMedia(ig_user_id) {
+        return this.get(`${ig_user_id}/media`)
+    }
+
+    async describeIGMedia(ig_media_id) {
+        await this.get(`${ig_media_id}`, {
+            'fields': 'id,caption,comments_count,like_count,media_product_type,media_type,media_url,permalink,shortcode'
+        })
+        await this.get(`${ig_media_id}/insights`, {
+            'metric': 'engagement,impressions,reach,saved'
+        })
+    }
+
+    async commentOnIGMedia(ig_media_id, comment) {
         const commentURL = `${baseUrl + ig_media_id}/comments`
-        setTimeout(() => {
-            const response = axios.post(commentURL, {
+        try {
+            const response = await axios.post(commentURL, {
                 access_token: config.accessToken,
                 message: comment
             })
-        }, 1000);
+            console.log(`Response from : ${commentURL} : ${response.status} , ${response.statusText}`);
+            console.log(response.data);
+        } catch (error) {
+            console.error(error);
+        }
     }
 
     async publishFBFeed(fb_page, message) {

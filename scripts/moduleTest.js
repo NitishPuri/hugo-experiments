@@ -1,8 +1,5 @@
 const FB = require('./insta')
-const TestClass = require('./testModule')
-
-var testModule = new TestClass()
-testModule.doStuff()
+// const TestClass = require('./testModule')
 
 var fb = new FB();
 // fb.getAccounts();
@@ -19,4 +16,12 @@ const gcsImagePath = 'https://storage.googleapis.com/generative-art-1/PerlinNois
 // const creation_id = '17957805349605598';
 // fb.publishIGmedia(fb.insta.printsh, creation_id)
 // fb.publishFBFeed(fb.pages.ccStudio, "Post from a bot!!")
-fb.publishFBPhoto(fb.pages.ccStudio, gcsImagePath);
+// fb.publishFBPhoto(fb.pages.ccStudio, gcsImagePath);
+// fb.listIGMedia(fb.insta.printsh)
+// .then((ig_media_list) => {
+
+// })
+// fb.describeIGMedia('17930841283891055')
+fb.commentOnIGMedia('17930841283891055', "Test comment on media. #instaapi")
+
+// fb.getPermissions()
