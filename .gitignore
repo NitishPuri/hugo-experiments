@@ -3,3 +3,4 @@ resources
 .vscode
 .git
 /public
+/temp
