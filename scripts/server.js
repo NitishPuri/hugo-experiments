@@ -3,13 +3,12 @@
 const express = require('express')
 const socket = require('socket.io')
 const fs = require('fs');
-const {Storage} = require('@google-cloud/storage');
-const { TwitterApi } = require('twitter-api-v2');
 const request = require('request');
-const FB = require('./insta.js');
+const { FB, Twitter, GCS } = require('./insta.js');
 
-const config = require('./config.js');
 const fb = new FB;
+const twitter = new Twitter()
+const gcs = new GCS()
 
 // Create express app and server.
 let app = express();
@@ -49,22 +48,21 @@ io.sockets.on('connection', (connection) => {
     const filename = `${sketch}_${Date.now()}.jpg`
     const filepath = saveImage(filename, data.imageData)
     
-    const tweet_id = await tweetImage(data.caption, filepath)
+    const tweet_id = await twitter.tweetImage(data.caption, filepath)
 
-    const gcsImagePath = await uploadFileGCS(config.gcs.bucketName, filepath, filename);
+    const gcsImagePath = await gcs.uploadFileGCS(filepath, filename);
 
     const ig_creation_id = await fb.createIGMedia(fb.insta.printsh, gcsImagePath, data.caption);
     const publish_response = await fb.publishIGmedia(fb.insta.printsh, ig_creation_id);
     console.log("Image publish response from to insta : ", publish_response.status);
 
     const fb_post = await fb.publishFBPhoto(fb.pages.ccStudio, gcsImagePath);
-
   })
 
   connection.on('repost', () => {
     const gcsImagePath = 'https://storage.googleapis.com/generative-art-1/PerlinNoise_1642871786851.jpg';
     // createIGMedia(config.instagram, gcsImagePath, "Test Media")
-    fb.createIGMedia(config.facebook.insta.printsh, gcsImagePath, "Test Media")
+    fb.createIGMedia(fb.insta.printsh, gcsImagePath, "Test Media")
   })
 })
 
@@ -80,35 +78,3 @@ function saveImage(filename, imageData) {
   console.log(`File saved as : ${filepath}`)
   return filepath;
 }
-
-// Twitter Support
-const twitterClient = new TwitterApi(config.twitterConfig)
-async function tweetImage(caption, filename) {
-  const mediaIds = await Promise.all([
-    twitterClient.v1.uploadMedia('./' + filename)
-  ])
-  console.log("Twitter media uploaded : ", mediaIds)
-  const tweet_response = await twitterClient.v1.tweet(caption, { media_ids: mediaIds })
-  console.log(`Tweet posted on ${tweet_response.created_at} with id {${tweet_response.id}}: `)
-  return tweet_response.id;
-}
-
-// Google Cloud Storage
-// let storage = new Storage({keyFilename: 'starry-folder-225114-3baffa34f0d9.json'});
-let gcstorage = new Storage({keyFilename: 'scripts/starry-folder-225114-3baffa34f0d9.json'});
-async function uploadFileGCS(bucketName, filepath, destFileName) {
-  let res = await gcstorage.bucket(bucketName).upload(filepath, {
-    destination: destFileName, 
-  });
-
-  //TODO: How to check if upload was successfull??
-
-  console.log(`${filepath} uploaded to ${bucketName}`);
-  const gcsPrefix = 'https://storage.googleapis.com/';
-  const gcsImagePath = gcsPrefix + config.gcs.bucketName + '/' + destFileName;
-  return gcsImagePath;
-}
-
-
-
-

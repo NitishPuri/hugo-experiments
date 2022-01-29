@@ -1,7 +1,8 @@
-const FB = require('./insta')
+const { FB, Twitter } = require('./insta')
 // const TestClass = require('./testModule')
 
 var fb = new FB();
+var twitter = new Twitter();
 // fb.getAccounts();
 // fb.getFBUser();
 // fb.getNode(fb.pages.ccStudioId);
@@ -22,6 +23,6 @@ const gcsImagePath = 'https://storage.googleapis.com/generative-art-1/PerlinNois
 
 // })
 // fb.describeIGMedia('17930841283891055')
-fb.commentOnIGMedia('17930841283891055', "Test comment on media. #instaapi")
-
-// fb.getPermissions()
+// fb.commentOnIGMedia('17930841283891055', "Test comment on media. #instaapi")
+fb.getPermissions()
+twitter.currentUser();

@@ -1,15 +1,18 @@
 const axios = require('axios').default;
-var config = require('./config.js').facebook;
+const { TwitterApi } = require('twitter-api-v2');
+const { Storage } = require('@google-cloud/storage');
+const config = require('./config.js');
+const fb_config = config.facebook;
 
-var baseUrl = 'https://graph.facebook.com/v12.0/';
 class FB {    
-    pages = config.pages;
-    insta = config.insta;
+    pages = fb_config.pages;
+    insta = fb_config.insta;
+    base_url = 'https://graph.facebook.com/v12.0/';
 
     async get(endpoint, params = {}) {
-        const url = baseUrl + endpoint;
+        const url = this.base_url + endpoint;
         console.log("Fetching : ", url);
-        params['access_token'] = config.accessToken;
+        params['access_token'] = fb_config.accessToken;
         try {
             const response = await axios.get(url, {params: params});
             console.log(`Response from : ${url} : ${response.status} , ${response.statusText}`);
@@ -28,19 +31,19 @@ class FB {
         return this.get(nodeId, params);
     }
 
-    getFBUser = () => this.getNode(config.userId)
+    getFBUser = () => this.getNode(fb_config.userId)
     getPage = (page) => this.getNode(page)
     getPermissions = () => this.get('me/permissions')
-    getAccounts = () => this.get(`${config.userId}/accounts`)
+    getAccounts = () => this.get(`${fb_config.userId}/accounts`)
 
     async createIGMedia(ig_user_id, imageURL, caption) {
-        const containerCreationURL =  `${baseUrl + ig_user_id}/media`;
+        const containerCreationURL =  `${this.base_url + ig_user_id}/media`;
         console.log(imageURL)
         console.log(containerCreationURL)
         try {
             const response = await axios.post(containerCreationURL, {
                 image_url: imageURL,
-                access_token: config.accessToken,
+                access_token: fb_config.accessToken,
                 caption: caption
             });
             console.log(`Response from : ${containerCreationURL} : ${response.status}`)            
@@ -53,11 +56,11 @@ class FB {
     }   
 
     async publishIGmedia(ig_user_id, creation_id) {
-        const publishURL = `${baseUrl + ig_user_id}/media_publish`;
+        const publishURL = `${this.base_url + ig_user_id}/media_publish`;
         console.log(publishURL)
         try {
             const response = await axios.post(publishURL, {
-                access_token: config.accessToken,
+                access_token: fb_config.accessToken,
                 creation_id: creation_id
             })
             console.log(`Response from : ${publishURL} : ${response.status}`);
@@ -82,10 +85,10 @@ class FB {
     }
 
     async commentOnIGMedia(ig_media_id, comment) {
-        const commentURL = `${baseUrl + ig_media_id}/comments`
+        const commentURL = `${this.base_url + ig_media_id}/comments`
         try {
             const response = await axios.post(commentURL, {
-                access_token: config.accessToken,
+                access_token: fb_config.accessToken,
                 message: comment
             })
             console.log(`Response from : ${commentURL} : ${response.status} , ${response.statusText}`);
@@ -96,7 +99,7 @@ class FB {
     }
 
     async publishFBFeed(fb_page, message) {
-        const page_post_url = `${baseUrl + fb_page.id}/feed`
+        const page_post_url = `${this.base_url + fb_page.id}/feed`
         try {
             const response = await axios.post(page_post_url, {
                 access_token: fb_page.accessToken,
@@ -111,7 +114,7 @@ class FB {
     }
 
     async publishFBPhoto(fb_page, image_url) {
-        const page_post_url = `${baseUrl + fb_page.id}/photos`
+        const page_post_url = `${this.base_url + fb_page.id}/photos`
         try {
             const response = await axios.post(page_post_url, {
                 access_token: fb_page.accessToken,
@@ -144,4 +147,53 @@ class FB {
     
 }
 
-module.exports = FB;
+class Twitter {
+    twitterClient = new TwitterApi(config.twitterConfig)
+
+    async currentUser() {
+        const currentUser = await this.twitterClient.currentUser();
+        console.log(currentUser);
+        return currentUser;
+    }
+
+    async tweetText(text) {
+        const tweet_response = await this.twitterClient.v1.tweet(text);
+        console.log(`Tweet posted on ${tweet_response.created_at} with id {${tweet_response.id}}: `)
+        return tweet_response.id;
+    }
+
+    async commentOnTweet(text, tweet_id) {
+        const tweet_response = await this.twitterClient.v1.reply(text, tweet_id)
+        console.log(`Tweet posted on ${tweet_response.created_at} with id {${tweet_response.id}}: `)
+        return tweet_response.id;
+    }
+
+    async tweetImage(caption, filepath) {        
+        const mediaIds = await Promise.all([
+          this.twitterClient.v1.uploadMedia('./' + filepath)
+        ])
+        console.log("Twitter media uploaded : ", mediaIds)
+        const tweet_response = await this.twitterClient.v1.tweet(caption, { media_ids: mediaIds })
+        console.log(`Tweet posted on ${tweet_response.created_at} with id {${tweet_response.id}}: `)
+        return tweet_response.id;
+    }
+}
+
+class GCS {
+    gcstorage = new Storage({keyFilename: 'scripts/starry-folder-225114-3baffa34f0d9.json'})
+    gcsPrefix = 'https://storage.googleapis.com/'
+
+    async uploadFileGCS(filepath, destFileName) {
+        let res = await this.gcstorage.bucket(config.gcs.bucketName).upload(filepath, {
+          destination: destFileName, 
+        });
+      
+        //TODO: How to check if upload was successfull??        
+        console.log(`${filepath} uploaded to ${config.gcs.bucketName}`);
+        const gcsImagePath = this.gcsPrefix + config.gcs.bucketName + '/' + destFileName;
+        return gcsImagePath;
+      }
+      
+}
+
+module.exports = {FB, Twitter, GCS};
