@@ -3,12 +3,6 @@ title: "Search"
 sitemap:
   priority : 0.1
 layout: "search"
-menu:
-  main:
-    identifier: "search"
-    weight: 200 
-    parent: ""
-
 ---
 
 Added as described here,  
