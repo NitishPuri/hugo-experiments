@@ -12,7 +12,7 @@ let x, y;
 let previous = 0;
 let previousTwo = 0
 
-let g;
+let graphics;
 
 class Params {
   constructor() {
@@ -37,7 +37,7 @@ class Params {
     }
   }
   reset() {
-    g.background(0);
+    graphics.background(0);
 
     Object.keys(gui.__folders["Transforms"].__folders).forEach((a, i) => {
       gui.__folders["Transforms"].__folders[a].__controllers.forEach(c => {
@@ -52,7 +52,7 @@ class Params {
       c.updateDisplay()
     });
   }
-  clearBackground() { g.background(0) }
+  clearBackground() { graphics.background(0) }
 }
 
 let gui;
@@ -99,11 +99,11 @@ function setup() {
   // put setup code here
   createCanvasCustom()
 
-  g = createGraphics(width, height)
+  graphics = createGraphics(width, height)
 
-  g.background(0)
-  g.colorMode(HSB, 100, 100, 100, 100)
-  g.strokeWeight(2);
+  graphics.background(0)
+  graphics.colorMode(HSB, 100, 100, 100, 100)
+  graphics.strokeWeight(2);
 
   param.reset()
 
@@ -123,7 +123,7 @@ function draw() {
   // console.log(frameCount)
   let s = [10, 45, 80, 100]
 
-  g.background(0, 0, 0, param.background)
+  graphics.background(0, 0, 0, param.background)
   for (let i = 0; i < param.speed; i++) {
     let p = random();
     let color = 0;
@@ -143,14 +143,14 @@ function draw() {
     }
 
     // g.stroke((color) % 100, 100, 100, param.alpha)
-    g.stroke(color, 100, 100, param.alpha)
+    graphics.stroke(color, 100, 100, param.alpha)
 
     // let mx = map(x, -2.1820, 2.6558, 0, width)
     // let my = map(y, 0, 9.9983, height, 0)
     let mx = map(x, param.extents.xMin, param.extents.xMax, 0, width)
     let my = map(y, param.extents.yMin, param.extents.yMax, height, 0)
     // if (i != 3) {
-    g.point(mx, my);
+    graphics.point(mx, my);
     // }
     // previous++
     // if (i == 3) {
@@ -170,5 +170,5 @@ function draw() {
   //   translate(-width / 2, -height / 2)
   // }
 
-  image(g, 0, 0, width, height)
+  image(graphics, 0, 0, width, height)
 }

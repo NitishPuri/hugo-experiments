@@ -8,8 +8,8 @@ relativeURLS = true
 [params]
 author = "Nitish Puri"
 description = "These are some notes."
-logo = "https://www.mywebsite.com/images/logo.png"
-images = ["/images/site-feature-image.jpg"]
+logo = "/brand2.png"
+images = ["/brand2.png"]
 
 [taxonomies]
   tag = "tags"
@@ -24,5 +24,3 @@ enableRobotsTXT = true
 [frontmatter]
 date = ["date", "publishDate", "lastmod"]
 lastmod = ["lastmod", ":fileModTime", ":default"]
-
-sectionPagesMenu = "main"

@@ -19,10 +19,10 @@ crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     // Args : {w, h, renderer, statsFunc}
     function createCanvasCustom(opt = {}) {
         
-        var sketch_holder_id = "sketch-holder";        
+        var sketch_holder_id = "sketch-holder";   // <--- Defined in themes/layouts/baseof.html ... 
         
-        let sketch_holder = document.getElementById('#' + sketch_holder_id);
-        opt.w = opt.w || window.innerWidth
+        let sketch_holder = document.getElementById(sketch_holder_id);
+        opt.w = opt.w || window.innerWidth - 17 // magic number 17!!!
         opt.h = opt.h || windowHeight
         let cnv = createCanvas(opt.w, opt.h, opt.renderer)        
         cnv.parent(sketch_holder_id)
