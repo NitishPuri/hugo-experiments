@@ -147,9 +147,46 @@ class FB {
     
 }
 
-class Twitter {
-    twitterClient = new TwitterApi(config.twitterConfig)
+class TwitterNative {
+    async lookupUser(username) {
+        // curl "https://api.twitter.com/2/users/by/username/{username}" -H "Authorization: Bearer $BEARER_TOKEN"
+        const url = `https://api.twitter.com/2/users/by/username/${username}`
+        const response = await axios.get(url, {
+            headers: {
+                'Authorization': `Bearer ${config.twitter.bearerToken}`
+            }
+        })
+        console.log(response.data)
+    }
+    async currentUserv2() {
+        // curl "https://api.twitter.com/2/users/me" -H "Authorization: OAuth $OAUTH_SIGNATURE"
+        // curl "https://api.twitter.com/2/users/me" -H "Authorization: OAuth 240619432-gYkD55uSH3U8LGrVIdlUbohTgkDC9NCBATfNyd8e"
+        const url = `https://api.twitter.com/2/users/me`
+        const response = await axios.get(url, {
+            headers: {
+                'Authorization': `OAuth oauth_consumer_key`
+            }
+        })
+        console.log(response.data)
+    }
 
+    async currentUserv1() {
+        // curl "https://api.twitter.com/2/users/me" -H "Authorization: OAuth $OAUTH_SIGNATURE"
+        // curl "https://api.twitter.com/2/users/me" -H "Authorization: OAuth 240619432-gYkD55uSH3U8LGrVIdlUbohTgkDC9NCBATfNyd8e"
+        const url = `https://api.twitter.com/1.1/account/verify_credentials.json`
+        const response = await axios.get(url, {
+            headers: {
+                'Authorization': `OAuth oauth_consumer_key=${config.twitter}`
+            }
+        })
+        console.log(response.data)
+    }
+
+}
+
+class Twitter {
+    twitterClient = new TwitterApi(config.twitter.config)
+    
     async currentUser() {
         const currentUser = await this.twitterClient.currentUser();
         console.log(currentUser);
@@ -196,4 +233,4 @@ class GCS {
       
 }
 
-module.exports = {FB, Twitter, GCS};
+module.exports = {FB, Twitter, TwitterNative, GCS};

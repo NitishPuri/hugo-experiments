@@ -10,11 +10,10 @@
     "nodemon": "^2.0.15",
     "request": "^2.88.2",
     "socket.io": "^4.4.1",
-    "twitter-api-v2": "^1.9.1",
-    "ws": "^8.4.0"
+    "twitter-api-v2": "^1.12.3"    
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "node scripts/moduleTest.js",
     "start": "nodemon scripts/server.js",
     "site": "hugo server --bind=192.168.1.14 --baseURL=http://192.168.1.14:1313"
   },
