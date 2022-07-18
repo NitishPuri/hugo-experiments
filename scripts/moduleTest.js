@@ -1,4 +1,4 @@
-const { FB } = require('./social')
+const { FB } = require('./insta')
 const { GCS } = require('./google')
 const { Twitter } = require('./twitter')
 
