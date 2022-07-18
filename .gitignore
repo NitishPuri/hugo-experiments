@@ -6,3 +6,4 @@ node_modules
 /temp
 /scripts/config.js
 /.hugo_build.lock
+/package-lock.json

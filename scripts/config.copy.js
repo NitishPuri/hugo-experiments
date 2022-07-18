@@ -1,15 +1,20 @@
 module.exports =  {
     facebook : {
         pages : {
-            ccStudio : "XXX"
+            ccStudio : "XXX",
+            printsh: 'XXX',
+            lifeonearth: 'XXX'
         },
         insta : {
-            printsh : "XXX"
+            ccStudio : "XXX",
+            printsh : "XXX",
+            lifeonearth: 'XXX'
         },
         accessToken : "XXX",
         userId : "XXX",
         appId: "XXX",
-        appSecret: "XXX",        
+        appSecret: "XXX",
+        appDisplayName: 'XXX'             
     },
     twitter: {
         username: '<DEVELEOPER ACCOUNT USERNAME>',
@@ -29,6 +34,7 @@ module.exports =  {
         }
     },
     gcs: {
-        bucketName : ""        
+        bucketName : "",
+        keyfilename: "XXX.json"                
     }
 }

@@ -33,7 +33,13 @@ express and webserver boilerplate from this blog
 ## Social media libs
 * Twitter
     * https://www.npmjs.com/package/twitter-api-v2 , https://github.com/PLhery/node-twitter-api-v2
-    * 
+* Google 
+    * Cloud Storage :: https://console.cloud.google.com 
+        * https://cloud.google.com/nodejs/getting-started
+        * https://cloud.google.com/nodejs/docs/reference/storage/latest
+        * https://github.com/googleapis/nodejs-storage/tree/main/samples
+    * Analytics :: https://analytics.google.com
+* 
 
 
 

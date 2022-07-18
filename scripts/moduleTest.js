@@ -1,17 +1,31 @@
 const { FB } = require('./social')
+const { GCS } = require('./google')
 const { Twitter } = require('./twitter')
-// const TestClass = require('./testModule')
 
-// var fb = new FB();
+// Twitter Tests
+// var twitter = new Twitter2();
+// twitter.lookupUser('NitPuri')
+// twitter.currentUser();
 
-// fb.getAccounts();
+// var twitter = new Twitter();
+// twitter.currentUser();
+
+// GCS Tests
+// const gcsImagePath = 'https://storage.googleapis.com/generative-art-1/PerlinNoise_1642871786851.jpg';
+// var gcs = new GCS();
+// gcs.uploadFileGCS('temp/PerlinNoise_1658084856962.jpg', 'PerlinNoise_1658084856962.jpg')
+
+
+var fb = new FB();
+fb.getAccounts();
+// fb.getInstagramId(fb.pages.printsh)
+// fb.getInstagramId(fb.pages.lifeonearth)
 // fb.getFBUser();
-// fb.getNode(fb.pages.ccStudioId);
-// fb.getNode(fb.pages.sketchesId);
-// fb.getNode(fb.insta.printsh);
+// fb.getNode(fb.pages.ccStudio);
+// fb.getNode(fb.pages.lifeonearth);
+fb.getNode(fb.insta.printsh);
 // fb.getNode(fb.insta.sketches);
 
-const gcsImagePath = 'https://storage.googleapis.com/generative-art-1/PerlinNoise_1642871786851.jpg';
 // fb.createIGMedia(fb.insta.printsh, gcsImagePath, "Test Media")
 
 
@@ -27,9 +41,3 @@ const gcsImagePath = 'https://storage.googleapis.com/generative-art-1/PerlinNois
 // fb.commentOnIGMedia('17930841283891055', "Test comment on media. #instaapi")
 // fb.getPermissions()
 
-// var twitter = new Twitter2();
-// twitter.lookupUser('NitPuri')
-// twitter.currentUser();
-
-var twitter = new Twitter();
-twitter.currentUser();

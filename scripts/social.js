@@ -1,7 +1,5 @@
 const axios = require('axios').default;
-const { Storage } = require('@google-cloud/storage');
-const config = require('./config.js');
-const fb_config = config.facebook;
+const fb_config = require('./config.js').facebook;
 
 class FB {    
     pages = fb_config.pages;
@@ -34,6 +32,9 @@ class FB {
     getPage = (page) => this.getNode(page)
     getPermissions = () => this.get('me/permissions')
     getAccounts = () => this.get(`${fb_config.userId}/accounts`)
+    getInstagramId = (pageId) => this.getNode(pageId, 'name,instagram_business_account')
+//     curl -i -X GET \
+//  "https://graph.facebook.com/v12.0/100872545845179?fields=instagram_business_account%2Cname&access_token=EAAJqAXHZBWSIBALVhv1yNC6mEttrMvYAp2nTATklmWsVLOZBlf2Oq9luRfJkCV20ealrAX8UBm1ZCotj0kR4RUPAfD5k6awPKZBEaseU2ADVbPvCMvAmBL10JZAogXGNgpGz1DRBJsqnsfd0zxXxBIBgDcj63OYB85xHkfqQSQkWoLDg6pxZC7"
 
     async createIGMedia(ig_user_id, imageURL, caption) {
         const containerCreationURL =  `${this.base_url + ig_user_id}/media`;
@@ -146,21 +147,4 @@ class FB {
     
 }
 
-class GCS {
-    gcstorage = new Storage({keyFilename: 'scripts/starry-folder-225114-3baffa34f0d9.json'})
-    gcsPrefix = 'https://storage.googleapis.com/'
-
-    async uploadFileGCS(filepath, destFileName) {
-        let res = await this.gcstorage.bucket(config.gcs.bucketName).upload(filepath, {
-          destination: destFileName, 
-        });
-      
-        //TODO: How to check if upload was successfull??        
-        console.log(`${filepath} uploaded to ${config.gcs.bucketName}`);
-        const gcsImagePath = this.gcsPrefix + config.gcs.bucketName + '/' + destFileName;
-        return gcsImagePath;
-      }
-      
-}
-
-module.exports = {FB, Twitter, TwitterNative, GCS};
+module.exports = {FB};
