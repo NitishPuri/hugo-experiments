@@ -1,4 +1,5 @@
-const { FB, Twitter2, Twitter } = require('./social')
+const { FB } = require('./social')
+const { Twitter } = require('./twitter')
 // const TestClass = require('./testModule')
 
 // var fb = new FB();
