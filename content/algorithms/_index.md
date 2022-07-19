@@ -2,4 +2,4 @@
 title: Algorithms
 ---
 
-Some algorithm implementations.
+Some algorithm implementations and visualizations.
