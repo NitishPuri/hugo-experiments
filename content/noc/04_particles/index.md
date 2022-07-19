@@ -6,5 +6,5 @@ scripts :
     - particleSystem.js
     - sketch.js
 date: "2018-12-27"
-title: Particle System (NOC)
+title: Simple Particle System (NOC)
 ---
