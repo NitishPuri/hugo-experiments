@@ -3,4 +3,7 @@ node_modules
 .vscode
 .git
 /public
+/temp
+/scripts/keys
 /.hugo_build.lock
+/package-lock.json

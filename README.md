@@ -3,6 +3,7 @@ Hugo based blog source.
 
 ## Local development server
 hugo server --bind=192.168.1.9 --baseURL=http://192.168.1.9:1313
+hugo server --bind=192.168.1.14 --baseURL=http://192.168.1.14:1313
 
 ## Using 
 * [p5.js](https://p5js.org/)
@@ -11,6 +12,13 @@ hugo server --bind=192.168.1.9 --baseURL=http://192.168.1.9:1313
 * [Box2d-html5](https://github.com/shiffman/The-Nature-of-Code-Examples-p5.js/tree/master/chp05_libraries/box2d-html5/lib).
 * [Toxiclibs.js](http://haptic-data.com/toxiclibsjs/)    
 * [Matter.js](http://brm.io/matter-js/)
+
+
+install browserify [techiediaries.com/how-to-bring-node-js-modules-to-the-browser/]
+`npm install -g browserify`
+
+express and webserver boilerplate from this blog
+[https://levelup.gitconnected.com/getting-started-with-node-js-and-websockets-f22dd0452105]
 
 ## Uses
 * Hugo
@@ -21,6 +29,19 @@ hugo server --bind=192.168.1.9 --baseURL=http://192.168.1.9:1313
 * [Toxiclibs.js](http://haptic-data.com/toxiclibsjs/)    
 * [Matter.js](http://brm.io/matter-js/)
 * [CCapture.js](github.com/spite/ccapture.js)
+
+## Social media libs
+* Twitter
+    * https://www.npmjs.com/package/twitter-api-v2 , https://github.com/PLhery/node-twitter-api-v2
+* Google 
+    * Cloud Storage :: https://console.cloud.google.com 
+        * https://cloud.google.com/nodejs/getting-started
+        * https://cloud.google.com/nodejs/docs/reference/storage/latest
+        * https://github.com/googleapis/nodejs-storage/tree/main/samples
+    * Analytics :: https://analytics.google.com
+* 
+
+
 
 * Recording functionality using samples at:
 webrtc.github.io/samples/src/content/capture/canvas-record/

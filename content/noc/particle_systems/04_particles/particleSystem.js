@@ -1,15 +1,19 @@
+function randomInt(val) {
+    return int(random(val))
+}
 class ParticleSystem {
     constructor(x, y, l) {
         this.particles = [];
         this.origin = createVector(x, y);
+        this.color = [randomInt(255), randomInt(255), randomInt(255)]        
     }
 
     addParticle() {
         if (random(1) < 0.5) {
-            this.particles.push(new Particle(this.origin.x, this.origin.y));
+            this.particles.push(new Particle(this.origin.x, this.origin.y, this.color));
         }
         else {
-            this.particles.push(new Confetti(this.origin.x, this.origin.y));
+            this.particles.push(new Confetti(this.origin.x, this.origin.y, this.color));
         }
     }
 

@@ -1,10 +1,15 @@
+function randomizeColor(color, extent = 15) {
+  return color.map((val) => val - extent + int(random(2 * extent)))  
+}
+
 class Particle {
-  constructor(x, y) {
+  constructor(x, y, color) {
     this.position = createVector(x, y);
     this.velocity = createVector(random(-1, 1), random(-2, -0.5));
     this.acceleration = createVector(0, 0);
     this.lifespan = 255;
     this.mass = (random(1, 3));
+    this.color = randomizeColor(color)
   }
 
   run() {
@@ -20,8 +25,9 @@ class Particle {
 
   display() {
     stroke(0, this.lifespan);
-    strokeWeight(2);
-    fill(127, this.lifespan)
+    strokeWeight(1);
+    fill(this.color, 100)
+    // fill(this.color)
     ellipse(this.position.x, this.position.y, this.mass * 12);
   }
 
@@ -38,15 +44,15 @@ class Particle {
 }
 
 class Confetti extends Particle {
-  constructor(x, y) {
-    super(x, y);
+  constructor(x, y, color) {
+    super(x, y, color);
   }
 
   display() {
     rectMode(CENTER);
-    fill(127, this.lifespan);
-    stroke(0, this.lifespan);
-    strokeWeight(2);
+    fill(this.color, this.lifespan);
+    // stroke(0, this.lifespan);
+    strokeWeight(1);
     push();
     translate(this.position.x, this.position.y);
     var theta = map(this.position.x, 0, width, 0, TWO_PI * 2);
