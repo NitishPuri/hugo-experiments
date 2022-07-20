@@ -1,6 +1,6 @@
 ---
 layout: sketch
-tags: ["coding-challenge", "algorithms"]
+tags: ["coding-challenge", "physics"]
 date: "2018-05-08"
 scripts: 
     - particle.js
