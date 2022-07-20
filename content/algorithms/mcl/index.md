@@ -7,15 +7,16 @@ scripts:
 date: "2018-04-30"
 title: Monte Carlo Localization(MCL)
 ---
+
+## Algorithm
 Also known as particle filter localization, is an algorithm for robots to localize using a particle filter.   
 Given a map of the environment, the goal of the algorithm is for the robot to dterine its pose within the environment.   
 
-At every time $$t$$ the algorithm takes as input the previous belief $$X_{t-1}=\{x_{t-1}^{[1]}, x_{t-1}^{[2]},...,x_{t-1}^{[M]}\}$$, 
-an actuation command $$u_t$$, and data received from sensors $$z_t$$; and the algorithm outputs the new belief $$X_t$$.   
+At every time \\(t\\) the algorithm takes as input the previous belief \\(X_{t-1}=\{x_{t-1}^{[1]}, x_{t-1}^{[2]},...,x_{t-1}^{[M]}\}\\), 
+an actuation command \\(u_t\\), and data received from sensors \\(z_t\\); and the algorithm outputs the new belief \\(X_t\\).   
 
-### Algorithm
 $$
-\mathbf{MCL}(X{t-1}, u_t, z_t): \\\
+\mathbf{MCL}(X{t-1}, u_t, z_t): \\\   
 \quad \bar X_t = X_t = \varnothing \\\
 \quad \text{for } m = 1 \text{to } M: \\\
 \quad \quad x_t^{[m]} = \mathbf{motion\_update}(u_t, x_{t-1}^{[m]}) \\\
@@ -28,6 +29,10 @@ $$
 \quad \text{endfor} \\\
 \quad \text{return } X_t
 $$
+
+## Implementation
+
+In the above description, the red dots
 
 TODO::
 * Add support for localization in a randomly generated map!!

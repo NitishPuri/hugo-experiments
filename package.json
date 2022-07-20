@@ -15,7 +15,7 @@
   "scripts": {
     "test": "node scripts/moduleTest.js",
     "start": "nodemon scripts/server.js",
-    "site": "hugo server --bind=192.168.1.14 --baseURL=http://192.168.1.14:1313"
+    "site": "hugo server --buildDrafts --disableFastRender"
   },
   "repository": {
     "type": "git",

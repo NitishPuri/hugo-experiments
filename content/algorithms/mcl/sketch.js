@@ -74,7 +74,7 @@ function setup() {
 
   params.reset();
 
-  frameRate(1)
+  frameRate(5)
   // noLoop()
 
 }
@@ -104,7 +104,7 @@ function draw() {
   let index = floor(random(numParticles))
   let beta = 0, mw = max(weights)
 
-  console.log("Max weight :: ", mw)
+  // console.log("Max weight :: ", mw)
 
   for (let i = 0; i < numParticles; i++) {
     beta += random(2 * mw)
@@ -119,7 +119,7 @@ function draw() {
   // particles = ps;
 
   // Evaluate the error
-  console.log("Step = " + (++currStep) + ", Evaluation = " + evaluation(myRobot, ps))
+  // console.log("Step = " + (++currStep) + ", Evaluation = " + evaluation(myRobot, ps))
 
   // Draw particles in green
   fill(0, 255, 0, 100)
