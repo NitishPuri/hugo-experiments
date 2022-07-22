@@ -7,6 +7,8 @@ scripts:
     - sketch.js
 title: Maze Generator
 weight: 2
+header_image: "mazeGenerator.jpg"
+summary: Maze generation using recursive backtracking.
 ---
 
 **Coding Challenge#10**

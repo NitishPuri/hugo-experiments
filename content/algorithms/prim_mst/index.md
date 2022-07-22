@@ -7,6 +7,9 @@ scripts:
     - sketch.js
 date: "2018-04-30"
 title: Prim's Minimum Spanning Tree
+header_image: prim_mst.jpg
+summary: "Minimum Spanning Tree using Prim's Algorithm"
+
 ---
 
 A **minimum spanning tree(MST)** or **minimum weight spanning tree** is a subset of tge edges of a *connected*, edge-weighted graph that connects all the vertices together, without any cycles and with the minimum possible total edge weight.    

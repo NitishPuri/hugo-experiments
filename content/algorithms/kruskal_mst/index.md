@@ -7,6 +7,9 @@ scripts:
     - sketch.js
 date: "2018-07-07"
 title: Kruskal's Minimum Spanning Tree
+header_image: kruskal_mst.jpg
+summary: "Minimup Spanning Tree using Kruskal's algorithm"
+
 ---
 
 A **minimum spanning tree(MST)** or **minimum weight spanning tree** is a subset of tge edges of a *connected*, edge-weighted graph that connects all the vertices together, without any cycles and with the minimum possible total edge weight.    

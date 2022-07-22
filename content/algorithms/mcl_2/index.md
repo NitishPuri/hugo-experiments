@@ -7,6 +7,9 @@ scripts:
     - helper.js
 date: "2018-10-02"
 title: Monte Carlo Localization(MCL) - v2
+header_image: mcl_2.jpg
+summary: "Monte Carlo Localization Visualization."
+
 ---
 
 ***In Progress***

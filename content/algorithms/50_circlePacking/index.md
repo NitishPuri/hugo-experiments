@@ -6,6 +6,9 @@ scripts:
     - circle.js
     - sketch.js
 title: Animated Circle Packing
+header_image: circlepacking.jpg
+summary: "Circle packing using random process."
+
 ---
 
 **Coding Challenge#50**   

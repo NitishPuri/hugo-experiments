@@ -6,6 +6,9 @@ scripts:
     - robot.js
 date: "2018-04-30"
 title: Monte Carlo Localization(MCL)
+header_image: mcl.jpg
+summary: "Monte Carlo Localization visualization."
+
 ---
 
 ## Algorithm

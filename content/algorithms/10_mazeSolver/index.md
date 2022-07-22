@@ -7,6 +7,8 @@ scripts:
     - sketch.js
 title: Maze Solver
 weight: 3
+header_image: mazeSolver.jpg
+summary: "Maze Generation and maze solver using recursive backtracking."
 ---
 
 **Coding Challenge#10**

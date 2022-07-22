@@ -6,6 +6,9 @@ scripts:
     - sketch.js
     - quadtree.js
 title: Quad Tree
+header_image: quadtree.jpg
+summary: "Visualizing quad tree data structure for point sets."
+
 ---
 
 **Coding Challenge#98**

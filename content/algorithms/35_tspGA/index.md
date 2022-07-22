@@ -5,7 +5,10 @@ date: "2018-04-02"
 scripts: 
     - ga.js
     - sketch.js
-title: Travelling Salesperson Using Genetic Algorithm
+title: Travelling Salesperson - Genetic Algorithm
+header_image: tspga.jpg
+summary: "Solving Travelling salesman problem using Genetic Algorithm"
+
 ---
 
 **Coding Challenge#35**
