@@ -7,6 +7,8 @@ scripts:
     - sketch.js
 title: A* Path Finding
 weight: 1
+summary: Visualize A* path finding.
+header_image: "astar.jpg"
 ---
 
 **Coding Challenge#51**
