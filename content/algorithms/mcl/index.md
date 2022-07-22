@@ -30,10 +30,6 @@ $$
 \quad \text{return } X_t
 $$
 
-## Implementation
-
-In the above description, the red dots
-
 TODO::
 * Add support for localization in a randomly generated map!!
 * Improve interaction.

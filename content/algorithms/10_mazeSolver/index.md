@@ -6,6 +6,7 @@ scripts:
     - cell.js
     - sketch.js
 title: Maze Solver
+weight: 3
 ---
 
 **Coding Challenge#10**

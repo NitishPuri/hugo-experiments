@@ -6,6 +6,7 @@ scripts:
     - cell.js
     - sketch.js
 title: Maze Generator
+weight: 2
 ---
 
 **Coding Challenge#10**
