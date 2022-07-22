@@ -6,6 +6,8 @@ scripts:
     - blob.js
     - sketch.js
 title: Metaballs
+header_image: metaballs.jpg
+summary: "METABALLS!!"
 ---
 
 **Coding Challenge#28**

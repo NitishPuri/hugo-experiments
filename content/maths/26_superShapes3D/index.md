@@ -4,6 +4,8 @@ tags: ["coding-challenge", "geometry"]
 date: "2018-02-02"
 scripts: [sketch.js]
 title: Supershapes in 3D
+header_image: supershapes3d.jpg
+summary: "Spherical super shapes using Super formula"
 ---
 
 **Coding Challenge#26**

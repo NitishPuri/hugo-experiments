@@ -5,6 +5,7 @@ date: "2018-04-03"
 scripts: 
     - sketch.js
 title: 3D knots
+header_image: 3dknots.jpg
 ---
 
 **Coding Challenge#87**

@@ -4,6 +4,10 @@ tags: ["coding-challenge", "nature", "showcase"]
 date: "2018-01-29"
 scripts: [sketch.js]
 title: Phyllotaxis
+header_image: noiselandscape.jpg
+summary: "Landscape uising perlin noise"
+header_image: phyllotaxis.jpg
+summary: "Phyllotaxis pattern visualization"
 ---
 
 **Coding Challenge#30**

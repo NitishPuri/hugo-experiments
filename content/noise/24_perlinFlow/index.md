@@ -6,6 +6,8 @@ scripts:
     - particle.js
     - sketch.js    
 title:  Perlin Noise Flow Field
+header_image: perlinflow.jpg
+summary: "Flow field visualization using perlin noise."
 ---
 
 **Coding Challenge#24**

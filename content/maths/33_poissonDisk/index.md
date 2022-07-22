@@ -4,6 +4,7 @@ tags: ["coding-challenge", "nature", "showcase"]
 date: "2018-02-06"
 scripts: [sketch.js]
 title: Poisson Disk Sampling
+header_image: poissondisk.jpg
 ---
 
 **Coding Challenge#33**

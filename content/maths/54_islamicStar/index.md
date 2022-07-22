@@ -13,6 +13,8 @@ scripts:
     - hankin.js
     - sketch.js
 title: Islamic Star Patterns
+header_image: islamicstar.jpg
+summary: "Mathematical star pattern using tiling"
 ---
 
 **Coding Challenge#54**

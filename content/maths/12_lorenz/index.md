@@ -5,6 +5,7 @@ date: "2018-02-02"
 scripts: 
     - sketch.js
 title: Lorenz Attractor
+header_image: lorenz.jpg
 ---
 
 **Coding Challenge#12**

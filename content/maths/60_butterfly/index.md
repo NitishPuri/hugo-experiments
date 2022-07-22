@@ -4,6 +4,9 @@ tags: [ "coding-challenge", "algorithms"]
 date: "2018-05-08"
 scripts: [sketch.js]
 title: Butterfly Generator
+header_image: butterfly.jpg
+summary: "Butterfly generator using mathematical rose pattern."
+
 ---
 
 **Coding Challenge#60**
