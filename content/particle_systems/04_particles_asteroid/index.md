@@ -10,4 +10,5 @@ scripts :
     - liquid.js
     - sketch.js
 title: Asteroid v2
+header_image: 04_particles_asteroid.jpg
 ---

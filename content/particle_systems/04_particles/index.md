@@ -7,4 +7,5 @@ scripts :
     - sketch.js
 date: "2018-12-27"
 title: Simple Particle System (NOC)
+header_image: 04_particles.jpg
 ---

@@ -7,6 +7,7 @@ scripts :
     - particleSystem.js
     - sketch.js
 title: Particle System Smoke
+header_image: 04_particles_smoke.jpg
 ---
 
 
