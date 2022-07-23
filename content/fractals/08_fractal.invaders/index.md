@@ -6,6 +6,7 @@ scripts:
     - invader.js
     - sketch.js
 title: Fractal.Invaders -- Original Fractal based filling
+header_image: fractalInvaders.jpg
 ---
 
 <https://blog.jverkamp.com/2014/09/16/fractal-invaders/>

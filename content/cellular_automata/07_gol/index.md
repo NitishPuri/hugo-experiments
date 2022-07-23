@@ -6,4 +6,5 @@ scripts:
     - GOL.js
     - sketch.js
 title: Game Of Life
+header_image: gol.jpg
 ---

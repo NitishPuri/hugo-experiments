@@ -9,4 +9,5 @@ scripts :
     - blanket.js
     - sketch.js
 title: Toxiclibs Softbody Cloth
+header_image: toxiclibs_cloth.jpg
 ---

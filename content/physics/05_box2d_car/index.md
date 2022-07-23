@@ -12,4 +12,5 @@ scripts :
     - particle.js
     - sketch.js
 title: Box2d - Car
+header_image: box2d_car.jpg
 ---

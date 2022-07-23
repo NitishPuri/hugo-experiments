@@ -8,4 +8,5 @@ scripts:
     - path.js
     - sketch.js
 title: Steering Behaviours
+header_image: steer.jpg
 ---

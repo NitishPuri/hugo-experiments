@@ -6,6 +6,7 @@ scripts:
     - sketch.js
     - segment.js
 title: Inverse Kinematics
+header_image: inverse_kinematics.jpg
 ---
 
 **Coding Challenge#64**

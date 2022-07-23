@@ -9,4 +9,5 @@ scripts:
     - rocket.js
     - sketch.js
 title: Smart Rockets
+header_image: smartrockets.jpg
 ---

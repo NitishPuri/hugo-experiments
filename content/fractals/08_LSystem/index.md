@@ -8,6 +8,7 @@ scripts:
     - Turtle.js
     - sketch.js
 title: L System Turtle Graphics
+header_image: lsystem.jpg
 ---
 
 Drawing Rules :   

@@ -5,6 +5,7 @@ date: "2018-02-02"
 scripts: 
     - sketch.js
 title: Reaction Diffusion
+header_image: diffusion.jpg
 ---
 
 **Coding Challenge#13**

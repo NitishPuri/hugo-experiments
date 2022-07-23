@@ -8,6 +8,7 @@ scripts:
     - Leaf.js
     - sketch.js
 title: Fractal Tree Using Space Colonization
+header_image: fractalTree.jpg
 ---
 
 **Coding Challenge#17**

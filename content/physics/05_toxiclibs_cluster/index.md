@@ -10,4 +10,5 @@ scripts :
     - cluster.js
     - sketch.js
 title: Toxiclibs Simple Cluster
+header_image: toxiclibs_cluster.jpg
 ---

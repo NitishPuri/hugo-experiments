@@ -10,4 +10,5 @@ scripts :
     - chain.js
     - sketch.js
 title: Toxiclibs Soft String
+header_image: toxiclibs_soft_string.jpg
 ---

@@ -9,4 +9,5 @@ scripts:
     - bloop.js
     - sketch.js
 title: Evolution Ecosystem
+header_image: ecosystem.jpg
 ---

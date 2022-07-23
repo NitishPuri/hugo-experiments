@@ -6,6 +6,7 @@ scripts:
     - particle.js
     - sketch.js
 title: Attraction and Repulsion
+header_image: attractors.jpg
 ---
 
 Coding Challenge#56

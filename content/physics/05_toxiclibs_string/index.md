@@ -9,4 +9,5 @@ scripts :
     - particle.js
     - sketch.js
 title: Toxiclibs Simple String
+header_image: toxiclibs_string.jpg
 ---

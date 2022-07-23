@@ -10,4 +10,5 @@ scripts :
     - cluster.js
     - sketch.js
 title: Toxiclibs Multi Cluster
+header_image: toxiclib_multi_cluster.jpg
 ---

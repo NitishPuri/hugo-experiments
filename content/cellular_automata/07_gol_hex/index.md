@@ -7,6 +7,7 @@ scripts:
     - Cell.js
     - sketch.js
 title: Hexagonal Game Of Life (HexLife)
+header_image: gol_hex.jpg
 ---
 
 

@@ -11,6 +11,7 @@ scripts :
     - blanket.js
     - sketch.js
 title: Textured Cloth Simulation
+header_image: textured_cloth.jpg
 ---
 
 **Coding Challenge#63**

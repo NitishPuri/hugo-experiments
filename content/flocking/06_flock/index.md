@@ -7,4 +7,5 @@ scripts:
     - flock.js
     - sketch.js
 title: Flocking
+header_image: flock.jpg
 ---

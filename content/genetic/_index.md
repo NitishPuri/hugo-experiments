@@ -1,4 +1,4 @@
 ---
-title: Flocking and Evolving Behaviours
+title: Evolving Behaviours
 weight: 9
 ---

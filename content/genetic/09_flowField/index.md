@@ -9,6 +9,7 @@ scripts:
     - rocket.js
     - sketch.js
 title: Evolving Flow Field
+header_image: evolving_flowfield.jpg
 ---
 
 Require customization..!!!

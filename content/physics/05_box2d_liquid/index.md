@@ -11,4 +11,5 @@ scripts :
     - particleSystem.js
     - sketch.js
 title: Box2d Liquid 1
+header_image: box2d_liquid.jpg
 ---

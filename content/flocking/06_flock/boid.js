@@ -81,7 +81,7 @@ class Boid {
     boids.forEach(b => {
       const d = p5.Vector.dist(this.position, b.position);
       if ((d > 0) && (d < desiredSeparation)) {
-        const diff = p5.Vector.sub(this.position, b);
+        let diff = p5.Vector.sub(this.position, b);
         diff.normalize();
         // diff.div(d);
         steer.add(diff);

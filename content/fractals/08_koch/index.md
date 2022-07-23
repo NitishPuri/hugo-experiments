@@ -7,4 +7,5 @@ scripts:
     - KochFractal.js
     - sketch.js
 title: Koch Curve
+header_image: koch.jpg
 ---

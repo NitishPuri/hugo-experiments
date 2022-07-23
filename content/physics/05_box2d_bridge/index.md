@@ -10,4 +10,5 @@ scripts :
     - bridge.js
     - sketch.js
 title: Box2d Bridge
+header_image: box2d_bridge.jpg
 ---

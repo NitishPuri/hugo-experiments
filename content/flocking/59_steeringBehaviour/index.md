@@ -6,6 +6,7 @@ scripts:
     - particle.js
     - sketch.js    
 title: Steering Behaviour
+header_image: steeringbehaviour.png
 ---
 
 **Coding Challenge#59**

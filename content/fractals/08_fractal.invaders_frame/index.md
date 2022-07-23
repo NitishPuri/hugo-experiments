@@ -6,5 +6,6 @@ scripts:
     - invader.js
     - sketch.js
 title: Fractal.Invaders
+header_image: fractalInvadersFrame.jpg
 ---
 

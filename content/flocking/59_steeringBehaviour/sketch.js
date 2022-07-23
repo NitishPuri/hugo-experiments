@@ -18,7 +18,7 @@ function setup() {
 
   stroke(255, 255, 255);
   strokeWeight(6);
-  var points = font.textToPoints('rainbow', 100, 300, 192)
+  var points = font.textToPoints('attractors', 100, 300, 192)
   points.forEach(p => {
     particles.push(new Particle(p.x, p.y));
   })

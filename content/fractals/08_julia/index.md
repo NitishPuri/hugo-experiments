@@ -5,6 +5,7 @@ date: "2018-01-27"
 scripts: 
     - sketch.js
 title: The Julia Set
+header_image: julia.jpg
 ---
 
 [Julia Set Wikipedia](https://en.wikipedia.org/wiki/Julia_set)   

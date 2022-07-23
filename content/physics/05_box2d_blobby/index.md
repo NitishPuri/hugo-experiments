@@ -12,4 +12,5 @@ scripts :
     - spring.js
     - sketch.js
 title: Blobby
+header_image: box2d_blobby.jpg
 ---

@@ -5,6 +5,8 @@ date: "2018-01-27"
 scripts: 
     - sketch.js
 title: The Mandelbrot Set
+header_image: mandelbrot.jpg
+summary: Simple rendering of the Mandelbrot set   
 ---
 
 <https://en.wikipedia.org/wiki/Mandelbrot_set>   

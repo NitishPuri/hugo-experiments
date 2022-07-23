@@ -11,4 +11,5 @@ scripts :
     - boundary.js
     - sketch.js
 title: Box2d Simple
+header_image: box2d_simple.jpg
 ---

@@ -6,6 +6,7 @@ scripts:
     - orbit.js
     - sketch.js
 title: Fractal Spirograph
+header_image: spirograph.jpg
 ---
 
 **Coding Challenge#61**

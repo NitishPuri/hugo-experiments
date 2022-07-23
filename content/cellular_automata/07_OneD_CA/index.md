@@ -6,4 +6,5 @@ scripts:
     - CA.js
     - sketch.js
 title: One Dimensional Cellular Automata
+header_image: oned_ca.jpg
 ---

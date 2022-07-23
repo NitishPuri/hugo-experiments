@@ -6,6 +6,7 @@ scripts:
     - cell.js
     - sketch.js
 title: Mitosis
+header_image: mitosis.jpg
 ---
 
 **Coding Challenge#06**

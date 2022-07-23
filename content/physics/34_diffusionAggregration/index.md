@@ -6,6 +6,7 @@ scripts:
     - walker.js
     - sketch.js
 title: Diffusion Aggregration
+header_image: diffusionaggregration.jpg
 ---
 
 **Coding Challenge#34**

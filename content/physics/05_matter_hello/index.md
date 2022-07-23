@@ -9,4 +9,5 @@ scripts :
     - circle.js
     - sketch.js
 title: Matter.js Hello world
+header_image: matter_hello.jpg
 ---
