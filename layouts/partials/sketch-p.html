@@ -65,6 +65,14 @@ crossorigin="anonymous" referrerpolicy="no-referrer"></script>
         }
         return url
     }
+    function downloadImage(filename) {
+        console.log("Capturing Canvas.")
+        const canvas = document.getElementById('defaultCanvas0');
+        var link = document.createElement('a')
+        link.download = filename + '.jpg'
+        link.href = canvas.toDataURL('image/jpeg')
+        link.click()
+    }
 </script>
 
 {{ range $script := .Params.scripts }}

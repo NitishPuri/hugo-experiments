@@ -19,7 +19,7 @@ class Recorder_CC {
 
 let mediaRecorder;
 class Recorder_Web {
-  constructor() {
+  connect() {
     const canvas = document.getElementById('defaultCanvas0');
     var stream = canvas.captureStream(); // frames per second
     this.stream = stream
@@ -132,7 +132,7 @@ class Recorder_Web {
     const canvas = document.getElementById('defaultCanvas0');
     var link = document.createElement('a')
     link.download = filename
-    link.href = canvas.toDataURL('image/png')
+    link.href = canvas.toDataURL('image/jpeg')
     link.click()
   }
 }
