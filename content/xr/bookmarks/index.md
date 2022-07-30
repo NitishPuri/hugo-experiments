@@ -17,6 +17,7 @@ summary: Some links to webxr experiences.
     * https://xr-graph.vercel.app/
     * https://github.com/marlon360/xr-graph
 * https://aframe.io/blog/awoa-64/
+* https://aframe.io/showcase/
 * https://immersive-web.github.io/webxr-samples/
 
 https://glitch.com/@hpost/vr
