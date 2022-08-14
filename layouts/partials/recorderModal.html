@@ -1,0 +1,64 @@
+<!-- Modal -->  
+<div id="recorderModal" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <!-- <button type="button" class="close" data-bs-dismiss="modal" aria-hidden="true">&times;</button> -->
+                <h4 class="modal-title">Recorder</h4>                  
+            </div>
+            <div class="modal-body">
+                <div class="mb-3">
+                    <button type="button" class="btn btn-primary">Screenshot</button>
+                    <button type="button" class="btn btn-primary">Start Recording</button>    
+                </div>
+                
+                <div class="input-group input-group-sm mb-3">
+                    <textarea id="caption_input" type="text" class="form-control" rows="4">  text area input</textarea>                    
+                </div>
+                
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<!-- Button trigger modal -->
+<button id="recorderBtn" type="button" hidden="true" href="#recorderModal" data-bs-backdrop="false" data-bs-toggle="modal">
+    Launch demo modal
+</button>
+
+
+<script type="text/javascript">
+    // Make modal draggable, resizable
+    let $modal = $("#recorderModal");
+    $modal.draggable({
+        handle: ".modal-header",
+    });
+    $modal.resizable();
+    // Add 'r' keypress event handler
+    $(document).on('keypress', (e) => {
+        let tag = e.target.tagName.toLowerCase();
+        if(e.key === 'r') {
+            // Open recorder
+            $("#recorderBtn").click();     
+        }
+    })
+    // Populate recorder model caption string from title, tags and categories.
+    $(document).ready(function() {
+        let caption = "{{ .Title }}\n"
+        caption += "{{ .Description }}" // Description
+        let baseUrl = "https://nitishpuri.gitlab.io/hugo-experiments"  // {{ .Site.BaseURL }}
+        caption += (baseUrl + "{{ .RelPermalink }}\n")
+        const tags = []
+        const category = "{{ .Params.category }}"
+        if(category) { caption += (" #" + category) }
+        {{ range .Params.tags }} 
+        caption += " #{{ . }}" 
+        {{ end }}
+        console.log(caption)    
+        $("#caption_input").val(caption)
+    })
+</script>
