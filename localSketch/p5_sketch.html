@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.1/p5.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.1/addons/p5.sound.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dat-gui/0.7.9/dat.gui.min.js" integrity="sha512-WoO4Ih0CDOSLYafy22wZD/mcJ7k0ESLqtQsFa6zFKnEUrbtuGU+GkLtVhgt93xa2qewG5gKEC6CWlN8OaCTSVg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <link rel="stylesheet" type="text/css" href="p5_style.css">
+    <meta charset="utf-8" />
+
+  </head>
+  <body>
+    <main>
+      <div id="sketch-holder"></div>
+    </main>
+    <script>
+    // Args : {w, h, renderer, statsFunc}
+    function createCanvasCustom(opt = {}) {
+        
+        var sketch_holder_id = "sketch-holder";   // <--- Defined in themes/layouts/baseof.html ... 
+        
+        let sketch_holder = document.getElementById(sketch_holder_id);
+        opt.w = opt.w || window.innerWidth - 17 // magic number 17!!!
+        opt.h = opt.h || windowHeight
+        let cnv = createCanvas(opt.w, opt.h, opt.renderer)        
+        cnv.parent(sketch_holder_id)
+        return cnv
+    }
+    function windowResized() {
+        let canvas = select('.p5Canvas');
+        if(fullscreen()) {
+            resizeCanvas(window.innerWidth, window.innerHeight)
+            document.body.scrollTop = 0
+            document.body.style.overflow = 'hidden';
+        } else {
+            let sketch_holder = select('#sketch-holder');
+            resizeCanvas(sketch_holder.width, windowHeight)
+            document.body.style.overflow = 'visible';
+        }
+    }
+    function showStats(func) {
+        let fr = createP()
+        fr.class('stats')
+        func = func || (() => "FPS : " + floor(frameRate()))
+        let intervalId = setInterval(() => {
+            fr.html(func())
+        }, 500)
+        let showFr = true;
+        document.addEventListener('keydown', (ev) => {
+            if (ev.key === 'f' || ev.key === 'F') {
+                if (showFr) fr.hide()
+                else fr.show()
+                showFr = !showFr
+            }
+        })
+        return intervalId
+    }
+    // Resolve the URL of resource located in data directory!!
+    function resolveUrl(url) {
+        // return '/ProcessingExperiments' + url
+        if(document.location.origin === "https://nitishpuri.gitlab.io") {
+            return "/hugo-experiments" + url
+        }
+        return url
+    }
+    function downloadImage(filename) {
+        console.log("Capturing Canvas.")
+        const canvas = document.getElementById('defaultCanvas0');
+        var link = document.createElement('a')
+        link.download = filename + '.jpg'
+        link.href = canvas.toDataURL('image/jpeg')
+        link.click()
+    }
+
+    </script>
+    <script src="p5_sketch.js"></script>
+  </body>
+</html>

@@ -8,6 +8,7 @@ let params = {
   a: 10,
   b: 28,
   c: 8 / 3,
+  dt: 0.01,
   reset: function() {
     x = random(-0.05, 0.05)
     y = 0
@@ -20,21 +21,22 @@ function setup() {
   createCanvasCustom({ renderer: WEBGL });
 
   let gui = new dat.GUI()
-  gui.add(params, "a").min(1).max(100)
-  gui.add(params, "b")
-  gui.add(params, "c")
+  gui.add(params, "a").min(1).max(20)
+  gui.add(params, "b").min(20).max(30)
+  gui.add(params, "c").min(1).max(10)
+  gui.add(params, "dt").min(0.01).max(0.02)
   gui.add(params, "reset")
 
   colorMode(HSB)
   background(0)
 }
+
 function draw() {
 
   background(0)
-  
   orbitControl()
 
-  let dt = 0.01
+  let dt = params.dt
   let dx = params.a * (y - x)           // dx = a*(y - x)
   let dy = x * (params.b - z) - y       // dy = x*(b - z) * y
   let dz = x * y - params.c * z         // dz = x*y - c*z
@@ -60,7 +62,7 @@ function draw() {
   })
   endShape()
 
-  if(points.length > 5000) {
+  if(points.length > 10000) {
     params.reset()
   }
 
