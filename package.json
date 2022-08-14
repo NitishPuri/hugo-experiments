@@ -15,7 +15,8 @@
   "scripts": {
     "test": "node scripts/moduleTest.js",
     "start": "nodemon scripts/server.js",
-    "site": "hugo server --buildDrafts --disableFastRender"
+    "site": "hugo server --buildDrafts --disableFastRender",
+    "local_dev": "python -m http.server --directory localSketch"
   },
   "repository": {
     "type": "git",
