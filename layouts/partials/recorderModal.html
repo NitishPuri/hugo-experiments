@@ -18,14 +18,13 @@
                 
             </div>
             <div class="modal-footer">
+                <span id="connection_status" class="me-auto text-danger">Not Connected...</span>            
                 <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>
             </div>
         </div>
-        <!-- /.modal-content -->
     </div>
-    <!-- /.modal-dialog -->
 </div>
-<!-- Button trigger modal -->
+<!-- Hidden Button trigger modal -->
 <button id="recorderBtn" type="button" hidden="true" href="#recorderModal" data-bs-backdrop="false" data-bs-toggle="modal">
     Launch demo modal
 </button>
@@ -60,5 +59,9 @@
         {{ end }}
         console.log(caption)    
         $("#caption_input").val(caption)
+        // Check connection status
+        if(false) {
+            $("#connection_status").text("Connected...").toggleClass("text-danger text-success")
+        }
     })
 </script>
