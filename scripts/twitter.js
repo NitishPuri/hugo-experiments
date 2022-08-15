@@ -1,5 +1,5 @@
 const { TwitterApi } = require('twitter-api-v2');
-const config = require('./config.js');
+const config = require('./keys/config');
 const axios = require('axios').default;
 
 class Twitter {

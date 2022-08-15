@@ -4,7 +4,9 @@ const express = require('express')
 const socket = require('socket.io')
 const fs = require('fs');
 const request = require('request');
-const { FB, Twitter, GCS } = require('./social.js');
+const { FB } = require('./insta');
+const { Twitter } = require('./twitter');
+const { GCS } = require('./google');
 
 const fb = new FB;
 const twitter = new Twitter()
@@ -24,7 +26,7 @@ var server = app.listen(3000, () => {
 
 // Create web socket
 var io = socket(server, {
-    cors: {origin: 'http://localhost:1313'},
+    cors: {origin: ['http://localhost:8000', 'http://localhost:1313']},    // origin of request (hugo or local python server)
     maxHttpBufferSize: 1e8
 });
 

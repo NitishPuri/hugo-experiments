@@ -1,5 +1,5 @@
 const { Storage } = require('@google-cloud/storage');
-const config = require('./config.js');
+const config = require('./keys/config');
 
 class GCS {
     gcstorage = new Storage({keyFilename: config.gcs.keyfilename})

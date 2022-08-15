@@ -1,5 +1,5 @@
 const axios = require('axios').default;
-const fb_config = require('./config.js').facebook;
+const fb_config = require('./keys/config').facebook;
 
 class FB {    
     pages = fb_config.pages;
