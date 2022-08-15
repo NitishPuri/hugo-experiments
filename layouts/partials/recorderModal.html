@@ -37,7 +37,7 @@ integrity="sha512-iqRVtNB+t9O+epcgUTIPF+nklypcR23H1yR1NFM9kffn6/iBhZ9bTB6oKLaGMv
 <script type="text/javascript">
     // Make modal draggable, resizable
     $("#recorderModal").draggable({ handle: ".modal-header", }).resizable();
-
+    
     // Add 'r' keypress event handler
     $(document).on('keypress', (e) => {
         let tag = e.target.tagName.toLowerCase();
@@ -60,16 +60,21 @@ integrity="sha512-iqRVtNB+t9O+epcgUTIPF+nklypcR23H1yR1NFM9kffn6/iBhZ9bTB6oKLaGMv
         {{ end }}
         console.log(caption)    
         $("#caption_input").val(caption)
-
+        
         let recorderModal = document.getElementById("recorderModal");
         recorderModal.addEventListener('show.bs.modal', function(event) {
-            document.recorder = new Recorder_Web();
-            document.recorder.connect(function() {
-                $("#connection_status").text("Connected...").toggleClass("text-danger text-success")    
-            });
+            console.log("Modal Opened")
+            if(!document.recorder) {
+                console.log("Creating recorder instance...")
+                document.recorder = new Recorder_Web();
+            }
+            if(document.recorder.socket && document.recorder.socket.connected) {
+                console.log("Recorder already connected.")
+            } else {
+                document.recorder.connect(function() {
+                    $("#connection_status").text("Connected...").toggleClass("text-danger text-success")    
+                });
+            }
         })
-    })
-
-    let recorder;
-    $("#recorderModal").on("")
+    })    
 </script>

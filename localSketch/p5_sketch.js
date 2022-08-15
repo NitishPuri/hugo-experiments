@@ -1,74 +1,82 @@
-let x = 0.01
-let y = 0
-let z = 0
 
-let points = []
 
-let params = {
-  a: 10,
-  b: 28,
-  c: 8 / 3,
-  dt: 0.01,
-  reset: function() {
-    x = random(-0.05, 0.05)
-    y = 0
-    z = 0
-    points = []
+var params = {
+  points: 100,
+  dx: 0.1,
+  rose: true,
+  size: 100,
+  animate: true,
+  reset: () => {
+    yOff = 0;
+    noiseSeed(random(100))
   }
 }
 
+var yOff = 0;
+
+let recorder;
+
 function setup() {
-  createCanvasCustom({ renderer: WEBGL });
+  createCanvasCustom();
 
-  let gui = new dat.GUI()
-  gui.add(params, "a").min(1).max(20)
-  gui.add(params, "b").min(20).max(30)
-  gui.add(params, "c").min(1).max(10)
-  gui.add(params, "dt").min(0.01).max(0.02)
-  gui.add(params, "reset")
+  var gui = new dat.GUI();
+  gui.add(params, 'points').min(50).max(400)
+  gui.add(params, 'dx').min(0.001).max(0.5).step(0.004)
+  gui.add(params, 'rose')
+  gui.add(params, 'animate')
+  gui.add(params, 'size').min(100).max(500)
+  gui.add(params, 'reset')
 
-  colorMode(HSB)
-  background(0)
+  recorder = new Recorder_Web()
 }
 
 function draw() {
+  background(0);
+  translate(width / 2, height / 2)
 
-  background(0)
-  orbitControl()
-
-  let dt = params.dt
-  let dx = params.a * (y - x)           // dx = a*(y - x)
-  let dy = x * (params.b - z) - y       // dy = x*(b - z) * y
-  let dz = x * y - params.c * z         // dz = x*y - c*z
-
-  x += (dx * dt)
-  y += (dy * dt)
-  z += (dz * dt)
-
-  points.push(createVector(x, y, z))
-
-  // translate(width / 2, height / 2)
-  scale(5)
-  stroke(255)
-  noFill();
-  // translate(x, y, z)
-
-  let hu = 0
-  beginShape()
-  points.forEach(p => {
-    stroke(hu, 255, 255)
-    vertex(p.x, p.y, p.z)
-    hu = ((hu + 0.1) % 255)
-  })
-  endShape()
-
-  if(points.length > 10000) {
-    params.reset()
+  if (params.rose) {
+    rotate(PI / 2)
   }
 
-  // sphere(0.5)
-  // sphere(x, y, z)
+  var r = 100;
+  stroke(255);
+  fill(200)
+  strokeWeight(1);
 
-  // console.log(x, y, z)
+  var da = PI / params.points;
+  var dx = params.dx;
+
+  const rMin = params.size * 2 / 5;
+  const rMax = params.size;
+
+  beginShape()
+  var xoff = 0;
+  let a = -PI / 2
+  for (; a < 3 / 2 * PI; a += da) {
+    var n = noise(xoff + yOff);
+    var r = map(n, 0, 1, rMin, rMax)
+    if (params.rose) {
+      r *= sin(2 * a);
+    }
+    var x = r * cos(a);
+    var y = r * sin(a);
+    // point(x, y);
+    if (a < PI / 2) {
+      xoff += dx;
+    }
+    else {
+      xoff -= dx;
+    }
+    vertex(x, y)
+    // r--;
+  }
+  endShape();
+
+  if (params.animate) {
+    yOff += 0.01
+  }
+
+  // noLoop();
 
 }
+

@@ -19,14 +19,14 @@ class Recorder_CC {
 
 let mediaRecorder;
 class Recorder_Web {
-  connect() {
+  connect(success_callback) {
     const canvas = document.getElementById('defaultCanvas0');
     var stream = canvas.captureStream(); // frames per second
     this.stream = stream
     console.log('Started stream capture from canvas element: ', stream);
     this.recordedBlobs = []
 
-    this.connectWebSocket()
+    this.connectWebSocket('http://localhost:3000', success_callback)
   }
 
   start() {
@@ -97,12 +97,18 @@ class Recorder_Web {
     this.download()
   }
 
-  connectWebSocket() {
-    var server = 'http://localhost:3000'
+  connectWebSocket(server, success_callback) {    
     console.log("Connecting to " + server)
-    const socket = io.connect(server)
-    console.log('Now connected');
+    const socket = io.connect(server, {
+      reconnectionAttempts: 3
+    })      
     this.socket = socket;
+    socket.on("connect", () => {
+      console.log("Connected to %s : socket id : %s", server, socket.id)
+      if(success_callback) {
+        success_callback()
+      }
+    })
   }
 
   capture() {
