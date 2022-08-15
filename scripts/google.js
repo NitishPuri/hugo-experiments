@@ -2,20 +2,24 @@ const { Storage } = require('@google-cloud/storage');
 const config = require('./keys/config');
 
 class GCS {
-    gcstorage = new Storage({keyFilename: config.gcs.keyfilename})
-    gcsPrefix = 'https://storage.googleapis.com/'
-
-    async uploadFileGCS(filepath, destFileName) {
-        let res = await this.gcstorage.bucket(config.gcs.bucketName).upload(filepath, {
-          destination: destFileName, 
-        });
+  gcstorage = new Storage({keyFilename: config.gcs.keyfilename})
+  gcsPrefix = 'https://storage.googleapis.com/'
+  
+  async uploadFileGCS(filepath, destFileName) {
+    try {
+      let res = await this.gcstorage.bucket(config.gcs.bucketName).upload(filepath, {
+        destination: destFileName, 
+      });
       
-        //TODO: How to check if upload was successfull??        
-        console.log(`${filepath} uploaded to ${config.gcs.bucketName}`);
-        const gcsImagePath = this.gcsPrefix + config.gcs.bucketName + '/' + destFileName;
-        return gcsImagePath;
-      }
-      
+      //TODO: How to check if upload was successfull??        
+      console.log(`${filepath} uploaded to ${config.gcs.bucketName}`);
+      const gcsImagePath = this.gcsPrefix + config.gcs.bucketName + '/' + destFileName;
+      return gcsImagePath;        
+    } catch (error) {
+      console.log("Error while uploading file to gcs. , ", error)
+    }
+  }
+  
 }
 
 module.exports = {GCS};

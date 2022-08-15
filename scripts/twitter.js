@@ -10,22 +10,22 @@ class Twitter {
         console.log(currentUser);
         return currentUser;
     }
-
+    
     async tweetText(text) {
         const tweet_response = await this.twitterClient.v1.tweet(text);
         console.log(`Tweet posted on ${tweet_response.created_at} with id {${tweet_response.id}}: `)
         return tweet_response.id;
     }
-
+    
     async commentOnTweet(text, tweet_id) {
         const tweet_response = await this.twitterClient.v1.reply(text, tweet_id)
         console.log(`Tweet posted on ${tweet_response.created_at} with id {${tweet_response.id}}: `)
         return tweet_response.id;
     }
-
+    
     async tweetImage(caption, filepath) {        
         const mediaIds = await Promise.all([
-          this.twitterClient.v1.uploadMedia('./' + filepath)
+            this.twitterClient.v1.uploadMedia('./' + filepath)
         ])
         console.log("Twitter media uploaded : ", mediaIds)
         const tweet_response = await this.twitterClient.v1.tweet(caption, { media_ids: mediaIds })
@@ -56,7 +56,7 @@ class TwitterNative {
         })
         console.log(response.data)
     }
-
+    
     async currentUserv1() {
         // curl "https://api.twitter.com/2/users/me" -H "Authorization: OAuth $OAUTH_SIGNATURE"
         // curl "https://api.twitter.com/2/users/me" -H "Authorization: OAuth 240619432-gYkD55uSH3U8LGrVIdlUbohTgkDC9NCBATfNyd8e"
@@ -68,7 +68,7 @@ class TwitterNative {
         })
         console.log(response.data)
     }
-
+    
 }
 
 
