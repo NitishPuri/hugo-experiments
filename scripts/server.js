@@ -31,7 +31,7 @@ var io = socket(server, {
 });
 
 io.sockets.on('connection', (connection) => {
-  console.log('new connection ' + connection.id)
+  console.log(`new connection ${connection.id} from ${connection.handshake.headers.origin}`)
 
   connection.on('image', (data) => {
     console.log("received a message " + data)
