@@ -8,7 +8,7 @@
             </div>
             <div class="modal-body">
                 <div class="mb-3">
-                    <button type="button" class="btn btn-primary">Screenshot</button>
+                    <button id="button_screenshot" type="button" class="btn btn-primary">Screenshot</button>
                     <button type="button" class="btn btn-primary">Start Recording</button>    
                 </div>
                 
@@ -75,6 +75,12 @@ integrity="sha512-iqRVtNB+t9O+epcgUTIPF+nklypcR23H1yR1NFM9kffn6/iBhZ9bTB6oKLaGMv
                     $("#connection_status").text("Connected...").toggleClass("text-danger text-success")    
                 });
             }
+        })
+
+        let button_screenshot = document.getElementById("button_screenshot");
+        button_screenshot.addEventListener('click', function(){
+            console.log("Caption :: ", caption)
+            document.recorder.capture("{{ .Title }}", caption)
         })
     })    
 </script>

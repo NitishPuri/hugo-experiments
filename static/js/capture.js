@@ -111,21 +111,30 @@ class Recorder_Web {
     })
   }
 
-  capture() {
+  capture(sketch_name, caption, canvas_id = 'defaultCanvas0') {
     console.log("Capturing Canvas.")
-    const canvas = document.getElementById('defaultCanvas0');
-    canvas.toBlob((blob) => {
-      console.log("Sending image.")
-      let data = {
-        imageData: blob,
-        size: blob.size,
-        mimeType: "image/jpeg",
-        caption: "Perlin noise flow field.",
-        sketch: "PerlinNoise"
-      };
-      console.log("Sending message with blob of size, %s MB", blob.size / (1024 * 1024))
-      this.socket.emit('imageCapture', data)
-    }, 'image/jpeg')
+    const canvas = document.getElementById(canvas_id);
+
+    if(this.socket.connected) {
+      canvas.toBlob((blob) => {
+        console.log("Sending image.")
+        let data = {
+          imageData: blob,
+          size: blob.size,
+          mimeType: "image/jpeg",
+          caption: caption,
+          sketch: sketch_name
+        };
+        console.log("Sending message with blob of size, %s MB", blob.size / (1024 * 1024))
+        this.socket.emit('imageCapture', data)
+      }, 'image/jpeg')  
+    } else {
+      console.log("Socket not connected, downloading image locally.")
+      var link = document.createElement('a')
+      link.download = sketch_name + ".jpeg"
+      link.href = canvas.toDataURL('image/jpeg')
+      link.click()  
+    }
   }
 
   repost() {
