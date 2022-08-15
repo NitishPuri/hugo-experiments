@@ -29,14 +29,15 @@
     Launch demo modal
 </button>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.4.1/socket.io.min.js" 
+integrity="sha512-iqRVtNB+t9O+epcgUTIPF+nklypcR23H1yR1NFM9kffn6/iBhZ9bTB6oKLaGMv8JE9UgjcwfBFg/eHC/VMws+g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="/js/capture.js"></script>
+<!-- <script src="/js/social.js"></script> -->
 
 <script type="text/javascript">
     // Make modal draggable, resizable
-    let $modal = $("#recorderModal");
-    $modal.draggable({
-        handle: ".modal-header",
-    });
-    $modal.resizable();
+    $("#recorderModal").draggable({ handle: ".modal-header", }).resizable();
+
     // Add 'r' keypress event handler
     $(document).on('keypress', (e) => {
         let tag = e.target.tagName.toLowerCase();
@@ -59,9 +60,16 @@
         {{ end }}
         console.log(caption)    
         $("#caption_input").val(caption)
-        // Check connection status
-        if(false) {
-            $("#connection_status").text("Connected...").toggleClass("text-danger text-success")
-        }
+
+        let recorderModal = document.getElementById("recorderModal");
+        recorderModal.addEventListener('show.bs.modal', function(event) {
+            document.recorder = new Recorder_Web();
+            document.recorder.connect(function() {
+                $("#connection_status").text("Connected...").toggleClass("text-danger text-success")    
+            });
+        })
     })
+
+    let recorder;
+    $("#recorderModal").on("")
 </script>
