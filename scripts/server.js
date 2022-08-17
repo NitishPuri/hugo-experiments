@@ -6,7 +6,7 @@ const fs = require('fs');
 const request = require('request');
 const { FB } = require('./insta');
 const { Twitter } = require('./twitter');
-const { GCS } = require('./google');
+const { GCS } = require('./gcs');
 
 const fb = new FB;
 const twitter = new Twitter()
