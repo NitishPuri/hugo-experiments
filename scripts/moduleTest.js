@@ -22,35 +22,25 @@ async function test_insta() {
     var fb = new FB();
     // fb.getAccounts();
     // fb.getInstagramId(fb.pages.printsh)
-    // fb.getInstagramId(fb.pages.lifeonearth)
-    // fb.getInstagramId(fb.pages.ccStudio)
-
+    
     // fb.getFBUser();
     // fb.getNode(fb.pages.ccStudio);
-    // fb.getNode(fb.pages.lifeonearth);
-    // fb.getNode(fb.insta.printsh);
-    // fb.getNode(fb.insta.sketches);
     // fb.getNode(fb.insta.ccStudio)
     
     var image_url = "https://nit-gen-bucket.s3.amazonaws.com/PerlinNoise_1658084856962.jpg";
-    const creation_id = await fb.createIGMedia(fb.insta.ccStudio, image_url, "Test Media")
+    // const creation_id = await fb.createIGMedia(fb.insta.ccStudio, image_url, "Test Media")    
+    // console.log("Media Created :: ", creation_id)
+    // const media_id = await fb.publishIGmedia(fb.insta.ccStudio, creation_id)
+    // console.log("Media Published :: ", media_id)
+    // fb.commentOnIGMedia(media_id, "Test Media #test_media")
     
-    console.log("Media Created :: ", creation_id)
-    fb.publishIGmedia(fb.insta.ccStudio, creation_id)
-
-
+    
     // fb.publishFBFeed(fb.pages.ccStudio, "Post from a bot!!")
-    // fb.publishFBPhoto(fb.pages.ccStudio, gcsImagePath);
-    // fb.listIGMedia(fb.insta.printsh)
-    // .then((ig_media_list) => {
-    
-    // })
-    // fb.describeIGMedia('17930841283891055')
-    // fb.commentOnIGMedia('17930841283891055', "Test comment on media. #instaapi")
-    // fb.getPermissions()
-    
+    fb.publishFBPhoto(fb.pages.ccStudio, image_url);
+
+    // fb.getPermissions()    
 }
-test_insta()
+// test_insta()
 
 
 async function test_aws() {
@@ -58,18 +48,24 @@ async function test_aws() {
     var aws = new AWSUtil();
     var buckets = await aws.listBuckets();
     var bucketName = buckets[0].Name
-
+    
     aws.getBucketACL(bucketName)
     aws.listObjects(bucketName)
-
+    
     // var filename = 'temp/PerlinNoise_1658084856962.jpg'
     // aws.upload(bucketName, filename);
+    
+    
+}
+// test_aws()
 
-
+async function test_image() {
+    const processImage = require('./image_utils').processImage
+    const new_filepath = await processImage("temp/One Dimensional Cellular Automata_1660841112440.jpg");
+    console.log("Returned path :: ", new_filepath)
 }
 
-
-// test_aws()
+test_image()
 
 
 

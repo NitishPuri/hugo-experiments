@@ -45,7 +45,6 @@ class FB {
                 caption: caption
             });
             console.log(`Response from : ${containerCreationURL} : ${response.status}`)            
-            console.log(response.data)
             console.log(`IG Media Container ID : ${response.data.id}`)
             return response.data.id;
         } catch (error) {
@@ -100,7 +99,7 @@ class FB {
         const page_post_url = `${this.base_url + fb_page.id}/feed`
         try {
             const response = await axios.post(page_post_url, {
-                access_token: fb_page.accessToken,
+                access_token: fb_page.token,
                 message: message
             })
             console.log(`Posted to page [${fb_page.id}] with status [${response.status}] `)
@@ -115,7 +114,7 @@ class FB {
         const page_post_url = `${this.base_url + fb_page.id}/photos`
         try {
             const response = await axios.post(page_post_url, {
-                access_token: fb_page.accessToken,
+                access_token: fb_page.token,
                 url: image_url                
             })
             console.log(`Posted photo to page [${fb_page.id}] with status [${response.status}] `)
