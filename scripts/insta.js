@@ -33,8 +33,6 @@ class FB {
     getPermissions = () => this.get('me/permissions')
     getAccounts = () => this.get(`${fb_config.userId}/accounts`)
     getInstagramId = (pageId) => this.getNode(pageId, 'name,instagram_business_account')
-//     curl -i -X GET \
-//  "https://graph.facebook.com/v12.0/100872545845179?fields=instagram_business_account%2Cname&access_token=EAAJqAXHZBWSIBALVhv1yNC6mEttrMvYAp2nTATklmWsVLOZBlf2Oq9luRfJkCV20ealrAX8UBm1ZCotj0kR4RUPAfD5k6awPKZBEaseU2ADVbPvCMvAmBL10JZAogXGNgpGz1DRBJsqnsfd0zxXxBIBgDcj63OYB85xHkfqQSQkWoLDg6pxZC7"
 
     async createIGMedia(ig_user_id, imageURL, caption) {
         const containerCreationURL =  `${this.base_url + ig_user_id}/media`;
