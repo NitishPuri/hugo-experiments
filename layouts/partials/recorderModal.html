@@ -56,7 +56,7 @@ integrity="sha512-iqRVtNB+t9O+epcgUTIPF+nklypcR23H1yR1NFM9kffn6/iBhZ9bTB6oKLaGMv
         const category = "{{ .Params.category }}"
         if(category) { caption += (" #" + category) }
         {{ range .Params.tags }} 
-        caption += " #{{ . }}" 
+        caption += " #{{ . }}".replaceAll('-', '_')
         {{ end }}
         console.log(caption)    
         $("#caption_input").val(caption)
