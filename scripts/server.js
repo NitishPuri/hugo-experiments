@@ -7,7 +7,7 @@ const { FB } = require('./insta');
 const { Twitter } = require('./twitter');
 const { GCS } = require('./gcs');
 const { AWSUtil } = require('./aws');
-const {saveImage, processImage} = require('./image_utils')
+const {processImage, saveFile} = require('./image_utils')
 
 
 
@@ -48,15 +48,15 @@ io.sockets.on('connection', (connection) => {
         console.log("Image size %d MB" , data.size / (1024*1024))
         console.log("Image type " , data.mimeType)
         console.log("Image Caption: ", data.caption)
-        console.log("Image Caption: ", data.sketch)
+        console.log("Sketch Name: ", data.sketch_name)
         
-        let sketch = data.sketch || 'sketch' 
+        let sketch = data.sketch_name || 'sketch' 
         const filename = `${sketch}_${Date.now()}.jpg`
-        var filepath = saveImage(filename, data.imageData)
+        var filepath = saveFile(filename, data.imageData)
         
-        filepath = processImage(filepath)
+        filepath = await processImage(filepath)
         
-        // const tweet_id = await twitter.tweetImage(data.caption, filepath)
+        const tweet_id = await twitter.tweetImage(data.caption, filepath)
         
         const use_gcs = false;
         var media_url = ""
@@ -72,15 +72,29 @@ io.sockets.on('connection', (connection) => {
             const publish_id = await fb.publishIGmedia(fb.insta.ccStudio, ig_creation_id);
             console.log("Media Published :: ", publish_id)
             
-            const fb_post = await fb.publishFBPhoto(fb.pages.ccStudio, gcsImagePath);  
+            const fb_post = await fb.publishFBPhoto(fb.pages.ccStudio, media_url);
+            fb.postFBPostComment(fb.pages.ccStudio, fb_post.post_id, data.caption)  
         }
         
     })
-    
-    connection.on('repost', () => {
-        const gcsImagePath = 'https://storage.googleapis.com/generative-art-1/PerlinNoise_1642871786851.jpg';
-        // createIGMedia(config.instagram, gcsImagePath, "Test Media")
-        fb.createIGMedia(fb.insta.printsh, gcsImagePath, "Test Media")
-    })
+
+    connection.on('videoCapture', async (data) => {
+        console.log("Received a message : videoCapture")
+        console.log("Video size %d MB" , data.size / (1024*1024))
+        console.log("Video Caption: ", data.caption)
+        console.log("Sketch Name: ", data.sketch_name)
+
+
+        const filename = saveFile(`${data.sketch_name}.webm`, data.videoData)
+
+        // process video
+
+        // tweet
+
+        // upload to cloud 
+            // post to insta,
+            // post to fb page
+
+    })    
 })
 

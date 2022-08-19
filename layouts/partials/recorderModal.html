@@ -101,7 +101,7 @@ integrity="sha512-iqRVtNB+t9O+epcgUTIPF+nklypcR23H1yR1NFM9kffn6/iBhZ9bTB6oKLaGMv
             if( document.recorder.recording ) {
                 // toggle icon
                 $('#button_record_icon').toggleClass('bi-record-circle', true).toggleClass('bi-record-circle-fill', false)
-                document.recorder.stop()
+                document.recorder.stop("{{ .Title }}".replaceAll(' ', '_'), caption)
             } else {
                 if( document.recorder.start() ) {
                     $('#button_record_icon').toggleClass('bi-record-circle', false).toggleClass('bi-record-circle-fill', true)

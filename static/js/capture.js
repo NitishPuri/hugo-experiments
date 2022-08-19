@@ -86,9 +86,6 @@ class Recorder_Web {
       }
     }
     console.log('Created MediaRecorder', mediaRecorder, 'with options', options);
-    // recordButton.textContent = 'Stop Recording';
-    // playButton.disabled = true;
-    // downloadButton.disabled = true;
     mediaRecorder.onstop = (event) => {
       console.log('Recorder stopped: ', event);
       // const superBuffer = new Blob(this.recordedBlobs, { type: 'video/webm' });
@@ -103,19 +100,40 @@ class Recorder_Web {
     this.recording = true
     return true;
   }
+
+  stop(sketch_name, caption) {
+    this.stopRecording()
+    this.sendVideo(sketch_name, caption)
+  }
+
+
   stopRecording() {
     mediaRecorder.stop();
     console.log('Recorded Blobs length: ', this.recordedBlobs.length);
-    // video.controls = true;
   }
 
-  download() {
+  sendVideo(sketch_name, caption) {
+    if(this.socket.connected) {
+      const blob = new Blob(this.recordedBlobs, {type: 'video/webm'})
+      console.log("Sending captured video.")
+      this.socket.emit('videoCapture', {
+        videoData: blob,
+        size: blob.size,
+        caption: caption,
+        sketch_name: sketch_name,
+      })
+    } else {
+      this.downloadVideo(sketch_name)
+    }
+  }
+
+  downloadVideo(sketch_name) {
     const blob = new Blob(this.recordedBlobs, { type: 'video/webm' });
     const url = window.URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.style.display = 'none';
     a.href = url;
-    a.download = 'test.webm';
+    a.download = `${sketch_name}.webm`;
     document.body.appendChild(a);
     a.click();
     setTimeout(() => {
@@ -124,10 +142,6 @@ class Recorder_Web {
     }, 100);
   }
 
-  stop() {
-    this.stopRecording()
-    this.download()
-  }
 
 
   captureImage(sketch_name, caption, canvas_id = 'defaultCanvas0') {
@@ -142,7 +156,7 @@ class Recorder_Web {
           size: blob.size,
           mimeType: "image/jpeg",
           caption: caption,
-          sketch: sketch_name
+          sketch_name: sketch_name
         };
         console.log("Sending message with blob of size, %s MB", blob.size / (1024 * 1024))
         this.socket.emit('imageCapture', data)

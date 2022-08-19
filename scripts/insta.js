@@ -136,9 +136,7 @@ class FB {
                 access_token: fb_page.token,
                 message: comment                
             })
-            console.log(`Posted photo to page [${fb_page.id}] with status [${response.status}] `)
-            console.log(`Post id : [${response.data.post_id}]`)
-            console.log(`Photo id : [${response.data.id}]`)
+            console.log(`Posted comment to post [${post_id}] with status [${response.status}] `)
             return response.data;
         } catch (error) {
             console.error(error);

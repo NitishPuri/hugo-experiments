@@ -1,13 +1,12 @@
 const fs = require('fs');
 const sharp =  require('sharp');
 
-function saveImage(filename, imageData) {
+function saveFile(filename, base64data) {
     let tempdir = 'temp'
     if(!fs.existsSync(tempdir)) {
         console.log("Creating temp dir.")
         fs.mkdirSync(tempdir)
     }
-    filename = filename.replaceAll(" ", "_")
     var filepath = `${tempdir}/${filename}`
     fs.writeFileSync(filepath, imageData, 'base64')
     console.log(`File saved as : ${filepath}`)
@@ -65,5 +64,4 @@ async function processImage(filepath) {
     }
 }
 
-
-module.exports = {saveImage, processImage}
+module.exports = {saveFile, processImage}

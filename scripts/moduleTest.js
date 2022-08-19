@@ -36,11 +36,13 @@ async function test_insta() {
     
     
     // fb.publishFBFeed(fb.pages.ccStudio, "Post from a bot!!")
-    fb.publishFBPhoto(fb.pages.ccStudio, image_url);
+    // fb.publishFBPhoto(fb.pages.ccStudio, image_url);
+
+    // fb.postFBPostComment(fb.pages.ccStudio, '100872602511840', "Test Comment")
 
     // fb.getPermissions()    
 }
-// test_insta()
+test_insta()
 
 
 async function test_aws() {
@@ -65,7 +67,7 @@ async function test_image() {
     console.log("Returned path :: ", new_filepath)
 }
 
-test_image()
+// test_image()
 
 
 
