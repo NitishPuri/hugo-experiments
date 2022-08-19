@@ -7,6 +7,8 @@ function test_twitter() {
     
     var twitter = new Twitter();
     twitter.currentUser();
+
+    // twitter.tweetMedia("Test Video", "temp/test1_procesed.mp4")
 }
 
 function test_gcs() {
@@ -37,12 +39,20 @@ async function test_insta() {
     
     // fb.publishFBFeed(fb.pages.ccStudio, "Post from a bot!!")
     // fb.publishFBPhoto(fb.pages.ccStudio, image_url);
-
+    
     // fb.postFBPostComment(fb.pages.ccStudio, '100872602511840', "Test Comment")
-
+    
     // fb.getPermissions()    
+
+
+    var video_url = "https://nit-gen-bucket.s3.amazonaws.com/test1_procesed.mp4"
+    const creation_id = await fb.createIGMedia(fb.insta.ccStudio, video_url, "Test Media")    
+    console.log("Media Created :: ", creation_id)
+    const media_id = await fb.publishIGmedia(fb.insta.ccStudio, creation_id)
+    console.log("Media Published :: ", media_id)
+    fb.commentOnIGMedia(media_id, "Test Media #test_media")
+
 }
-test_insta()
 
 
 async function test_aws() {
@@ -54,12 +64,9 @@ async function test_aws() {
     aws.getBucketACL(bucketName)
     aws.listObjects(bucketName)
     
-    // var filename = 'temp/PerlinNoise_1658084856962.jpg'
-    // aws.upload(bucketName, filename);
-    
-    
+    var filename = 'temp/test1_procesed.mp4'
+    aws.upload(bucketName, filename);    
 }
-// test_aws()
 
 async function test_image() {
     const processImage = require('./image_utils').processImage
@@ -67,7 +74,6 @@ async function test_image() {
     console.log("Returned path :: ", new_filepath)
 }
 
-// test_image()
 
 async function test_video() {
     const processVideo = require('./image_utils').processVideo
@@ -75,7 +81,15 @@ async function test_video() {
     console.log(new_filepath)
 }
 
-test_video()
+
+
+
+
+// test_twitter()
+// test_insta()
+// test_image()
+// test_aws()
+// test_video()
 
 
 

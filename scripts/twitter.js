@@ -3,6 +3,8 @@ const config = require('./keys/config');
 const axios = require('axios').default;
 
 class Twitter {
+    // https://github.com/plhery/node-twitter-api-v2#readme
+    // https://developer.twitter.com/en/docs/platform-overview
     twitterClient = new TwitterApi(config.twitter.config)
     
     async currentUser() {
@@ -23,7 +25,7 @@ class Twitter {
         return tweet_response.id;
     }
     
-    async tweetImage(caption, filepath) {        
+    async tweetMedia(caption, filepath) {        
         const mediaIds = await Promise.all([
             this.twitterClient.v1.uploadMedia('./' + filepath)
         ])

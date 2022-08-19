@@ -7,7 +7,7 @@ const { FB } = require('./insta');
 const { Twitter } = require('./twitter');
 const { GCS } = require('./gcs');
 const { AWSUtil } = require('./aws');
-const {processImage, saveFile} = require('./image_utils')
+const {processImage, saveFile, processVideo} = require('./image_utils')
 
 
 
@@ -56,7 +56,7 @@ io.sockets.on('connection', (connection) => {
         
         filepath = await processImage(filepath)
         
-        const tweet_id = await twitter.tweetImage(data.caption, filepath)
+        const tweet_id = await twitter.tweetMedia(data.caption, filepath)
         
         const use_gcs = false;
         var media_url = ""
@@ -84,14 +84,32 @@ io.sockets.on('connection', (connection) => {
         console.log("Video Caption: ", data.caption)
         console.log("Sketch Name: ", data.sketch_name)
 
-
-        const filename = saveFile(`${data.sketch_name}.webm`, data.videoData)
-
         // process video
+        var filename = saveFile(`${data.sketch_name}.webm`, data.videoData)
+        filepath = await processVideo(filepath)
 
         // tweet
+        const tweet_id = await twitter.tweetMedia(data.caption, filepath)
 
         // upload to cloud 
+        const use_gcs = false;
+        var media_url = ""
+        if (use_gcs) {
+            media_url = await gcs.uploadFileGCS(filepath, filename);
+        } else {
+            media_url = await aws.upload('nit-gen-bucket', filepath);
+        }
+
+        if(media_url) {
+            const ig_creation_id = await fb.createIGMedia(fb.insta.ccStudio, media_url, data.caption);
+            console.log("Media Created :: ", ig_creation_id)
+            const publish_id = await fb.publishIGmedia(fb.insta.ccStudio, ig_creation_id);
+            console.log("Media Published :: ", publish_id)
+            
+            // const fb_post = await fb.publishFBPhoto(fb.pages.ccStudio, media_url);
+            // fb.postFBPostComment(fb.pages.ccStudio, fb_post.post_id, data.caption)              
+        }
+
             // post to insta,
             // post to fb page
 
