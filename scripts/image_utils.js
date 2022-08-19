@@ -1,4 +1,5 @@
 const fs = require('fs');
+const { resolve } = require('path');
 const sharp =  require('sharp');
 
 function saveFile(filename, base64data) {
@@ -14,6 +15,7 @@ function saveFile(filename, base64data) {
 }
 
 async function processImage(filepath) {
+    // https://developers.facebook.com/docs/instagram-api/reference/ig-user/media#image-specifications
     // Check image dimensions (< 1440p)
     // Check image aspect (0.8 < 1.9)
 
@@ -64,4 +66,83 @@ async function processImage(filepath) {
     }
 }
 
-module.exports = {saveFile, processImage}
+async function processVideo (filepath) {
+    // https://developers.facebook.com/docs/instagram-api/reference/ig-user/media#video-specifications
+    const CONTAINER = "mp4"
+    const VIDEO_CODEC = "h264"
+    
+    const MAX_ASPECT = 16/9 // 1.777
+    const MIN_ASPECT = 4/5;  // 0.8
+    const MAX_DURATION = 60;    // 60s
+    const MIN_DURATION = 3;    // 3s
+    const MAX_WIDTH = 1920;
+    const FPS = 55;
+
+    const REELS_ASPECT = 9/16 // 0.56
+    const REELS_MAX_DURATION = 15*60  // 15m
+
+    const MAX_VIDEO_BITRATE = 5000  // 5000 kbps
+
+    // https://github.com/fluent-ffmpeg/node-fluent-ffmpeg#readme
+    const ffmpeg = require('fluent-ffmpeg')
+
+    // ffmpeg.ffprobe(filepath, (err, data) => {
+    //     if(err) {
+    //         console.error(`Error : ${err}`)
+    //     }
+    //     console.log(data);
+    // })
+
+    // console.log("Probe complete...")
+
+    const path = require('path');
+    const extname = path.extname(filepath);
+    const new_filename = filepath.replace(extname, `_procesed.mp4`)
+    console.log(`Saving to ${new_filename}`)
+
+
+    const ffmpeg_promise = () => {
+        return new Promise((resolve, reject) => {
+            ffmpeg(filepath)
+            // .on('progress', (info) => console.log(`progress: ${JSON.stringify(info)}%`))
+            .on('error', (err) => {
+                console.error(`error: ${err}`)
+                return reject(new Error(err))
+            })
+            .on('end', resolve)
+            .videoBitrate(MAX_VIDEO_BITRATE)
+            .fps(FPS)
+            .size('1920x?').aspect(MAX_ASPECT)
+            .autoPad()
+            .save(new_filename)    
+        })
+    }
+
+    await ffmpeg_promise();
+
+    console.log("Processing complete...")
+
+    return new_filename;
+
+    // ffmpeg(filepath)
+    //     // .on('progress', (info) => console.log(`progress: ${JSON.stringify(info)}%`))
+    //     .on('error', (err) => console.error(`error: ${err}`))
+    //     .videoBitrate(MAX_VIDEO_BITRATE)
+    //     .fps(FPS)
+    //     .size('1920x?').aspect(MAX_ASPECT)
+    //     .autoPad()
+    //     .save('temp/target2.mp4')
+
+
+    // ffmpeg(filepath)
+    //     // .on('progress', (info) => console.log(`progress: ${JSON.stringify(info)}%`))
+    //     .on('error', (err) => console.error(`error: ${err}`))
+    //     .videoBitrate(MAX_VIDEO_BITRATE)
+    //     .fps(FPS)
+    //     .size('1920x?').aspect(REELS_ASPECT)
+    //     .autoPad()
+    //     .save('temp/target3.mp4')
+
+}
+
+module.exports = {saveFile, processImage, processVideo}

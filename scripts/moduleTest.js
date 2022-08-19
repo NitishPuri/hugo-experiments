@@ -69,6 +69,14 @@ async function test_image() {
 
 // test_image()
 
+async function test_video() {
+    const processVideo = require('./image_utils').processVideo
+    const new_filepath = await processVideo("temp/test1.webm")
+    console.log(new_filepath)
+}
+
+test_video()
+
 
 
 

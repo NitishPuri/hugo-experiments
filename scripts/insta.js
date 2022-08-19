@@ -53,6 +53,7 @@ class FB {
     }   
 
     async publishIGmedia(ig_user_id, creation_id) {
+        // https://developers.facebook.com/docs/instagram-api/reference/ig-user/media#creating
         const publishURL = `${this.base_url + ig_user_id}/media_publish`;
         console.log(publishURL)
         try {
