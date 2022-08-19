@@ -7,7 +7,7 @@ function saveImage(filename, imageData) {
         console.log("Creating temp dir.")
         fs.mkdirSync(tempdir)
     }
-    filename = filename.replace(" ", "_")
+    filename = filename.replaceAll(" ", "_")
     var filepath = `${tempdir}/${filename}`
     fs.writeFileSync(filepath, imageData, 'base64')
     console.log(`File saved as : ${filepath}`)
@@ -24,8 +24,6 @@ async function processImage(filepath) {
     
     try {
         const metadata = await sharp(filepath).metadata();
-        console.log(metadata);
-
         var aspectRatio = metadata.width/metadata.height
         var width = metadata.width
         var height = metadata.height

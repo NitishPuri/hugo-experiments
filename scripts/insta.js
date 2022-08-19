@@ -96,6 +96,7 @@ class FB {
     }
 
     async publishFBFeed(fb_page, message) {
+        // https://developers.facebook.com/docs/pages/publishing/#publish-a-page-post
         const page_post_url = `${this.base_url + fb_page.id}/feed`
         try {
             const response = await axios.post(page_post_url, {
@@ -111,6 +112,7 @@ class FB {
     }
 
     async publishFBPhoto(fb_page, image_url) {
+        // https://developers.facebook.com/docs/pages/publishing/#publish-a-photo
         const page_post_url = `${this.base_url + fb_page.id}/photos`
         try {
             const response = await axios.post(page_post_url, {
@@ -125,6 +127,24 @@ class FB {
             console.error(error);
         }
     }
+
+    async postFBPostComment(fb_page, post_id, comment) {
+        // https://developers.facebook.com/docs/pages/publishing/#comment-on-a-post
+        const page_post_url = `${this.base_url + post_id}/comments`
+        try {
+            const response = await axios.post(page_post_url, {
+                access_token: fb_page.token,
+                message: comment                
+            })
+            console.log(`Posted photo to page [${fb_page.id}] with status [${response.status}] `)
+            console.log(`Post id : [${response.data.post_id}]`)
+            console.log(`Photo id : [${response.data.id}]`)
+            return response.data;
+        } catch (error) {
+            console.error(error);
+        }
+    }
+
 
     async getAccessToken(config) {
         const accessTokenURL = 'http://graph.facebook.com/v12.0/oauth/access_token?';
