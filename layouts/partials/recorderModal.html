@@ -8,8 +8,12 @@
             </div>
             <div class="modal-body">
                 <div class="mb-3">
-                    <button id="button_screenshot" type="button" class="btn btn-primary">Screenshot</button>
-                    <button type="button" class="btn btn-primary">Start Recording</button>    
+                    <button id="button_screenshot" type="button" class="btn btn-primary" data-bs-toggle="tooltip" data-bs-placement="top" title="Screenshot">                         
+                        <i class="bi bi-camera"></i>
+                    </button>
+                    <button id="button_record" type="button" class="btn btn-primary" title="Start Recording">                        
+                        <i class="bi bi-record-circle"></i>
+                    </button>    
                 </div>
                 
                 <div class="input-group input-group-sm mb-3">
@@ -58,9 +62,9 @@ integrity="sha512-iqRVtNB+t9O+epcgUTIPF+nklypcR23H1yR1NFM9kffn6/iBhZ9bTB6oKLaGMv
         {{ range .Params.tags }} 
         caption += " #{{ . }}".replaceAll('-', '_')
         {{ end }}
-        console.log(caption)    
         $("#caption_input").val(caption)
         
+        // Handle dialog opening event.
         let recorderModal = document.getElementById("recorderModal");
         recorderModal.addEventListener('show.bs.modal', function(event) {
             console.log("Modal Opened")
@@ -68,19 +72,24 @@ integrity="sha512-iqRVtNB+t9O+epcgUTIPF+nklypcR23H1yR1NFM9kffn6/iBhZ9bTB6oKLaGMv
                 console.log("Creating recorder instance...")
                 document.recorder = new Recorder_Web();
             }
-            if(document.recorder.socket && document.recorder.socket.connected) {
-                console.log("Recorder already connected.")
-            } else {
-                document.recorder.connect(function() {
-                    $("#connection_status").text("Connected...").toggleClass("text-danger text-success")    
-                });
-            }
+
+            $("#connection_status").text("Not Connected...").toggleClass("text-success", false).toggleClass("text-danger", true)    
+            document.recorder.connect(function() {
+                $("#connection_status").text("Connected...").toggleClass("text-success", true).toggleClass("text-danger", false)    
+            });
         })
 
+        // Screenshot 
         let button_screenshot = document.getElementById("button_screenshot");
         button_screenshot.addEventListener('click', function(){
-            console.log("Caption :: ", caption)
-            document.recorder.capture("{{ .Title }}", caption)
+            document.recorder.captureImage("{{ .Title }}".replaceAll(' ', '_'), caption)
+        })
+
+        // Start Recording
+        let button_record = document.getElementById("button_record")
+        button_record.addEventListener('click', function() {
+            console.log("Start Recording...")
+            document.recorder.start()  
         })
     })    
 </script>
