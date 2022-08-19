@@ -12,7 +12,7 @@
                         <i class="bi bi-camera"></i>
                     </button>
                     <button id="button_record" type="button" class="btn btn-primary" title="Start Recording">                        
-                        <i class="bi bi-record-circle"></i>
+                        <i id="button_record_icon" class="bi bi-record-circle"></i>
                     </button>    
                 </div>
                 
@@ -72,24 +72,45 @@ integrity="sha512-iqRVtNB+t9O+epcgUTIPF+nklypcR23H1yR1NFM9kffn6/iBhZ9bTB6oKLaGMv
                 console.log("Creating recorder instance...")
                 document.recorder = new Recorder_Web();
             }
-
+            
+            // Reset connection status.
             $("#connection_status").text("Not Connected...").toggleClass("text-success", false).toggleClass("text-danger", true)    
             document.recorder.connect(function() {
                 $("#connection_status").text("Connected...").toggleClass("text-success", true).toggleClass("text-danger", false)    
             });
-        })
 
+            // Reset record button
+            $('#button_record_icon').toggleClass('bi-record-circle', true).toggleClass('bi-record-circle-fill', false)
+        })
+        recorderModal.addEventListener('hide.bs.modal', function(event) {
+            if(document.recorder && document.recorder.recording) {
+                console.log("Stop ongoing recording on modal close.")
+                document.recorder.stop()
+            }
+        })
+        
         // Screenshot 
         let button_screenshot = document.getElementById("button_screenshot");
         button_screenshot.addEventListener('click', function(){
             document.recorder.captureImage("{{ .Title }}".replaceAll(' ', '_'), caption)
         })
-
+        
         // Start Recording
         let button_record = document.getElementById("button_record")
-        button_record.addEventListener('click', function() {
-            console.log("Start Recording...")
-            document.recorder.start()  
+        button_record.addEventListener('click', function() {      
+            if( document.recorder.recording ) {
+                // toggle icon
+                $('#button_record_icon').toggleClass('bi-record-circle', true).toggleClass('bi-record-circle-fill', false)
+                document.recorder.stop()
+            } else {
+                if( document.recorder.start() ) {
+                    $('#button_record_icon').toggleClass('bi-record-circle', false).toggleClass('bi-record-circle-fill', true)
+                } else {                
+                    console.log("Could not start media recording...")
+                    // Disable record button.
+                    button_record.disabled = true
+                }                
+            }                   
         })
     })    
 </script>

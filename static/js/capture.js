@@ -19,17 +19,48 @@ class Recorder_CC {
 
 let mediaRecorder;
 class Recorder_Web {
+  
+  socket_connected = false
   connect(success_callback) {
+    if(this.socket_connected && this.socket.connected) {
+      console.log("Recorder already connected.")
+      success_callback()
+    } else {
+      this.connectWebSocket('http://localhost:3000', success_callback)
+    }
+  }
+  
+  connectWebSocket(server, success_callback) {    
+    console.log("Connecting to " + server)
+    const socket = io.connect(server, {
+      reconnectionAttempts: 3
+    })      
+    this.socket = socket;
+    socket.on("connect", () => {
+      console.log("Connected to %s : socket id : %s", server, socket.id)
+      this.socket_connected = true
+      if(success_callback) {
+        success_callback()
+      }
+    })
+  }
+  
+  stream_created = false;
+  createCaptureStream() {
     const canvas = document.getElementById('defaultCanvas0');
     var stream = canvas.captureStream(); // frames per second
     this.stream = stream
     console.log('Started stream capture from canvas element: ', stream);
     this.recordedBlobs = []
-
-    this.connectWebSocket('http://localhost:3000', success_callback)
+    this.stream_created = true
+    this.recording = false
   }
 
   start() {
+    if(this.stream_created == false) {
+      this.createCaptureStream()
+    }
+
     console.log("Recorder started.")
     let options = { mimeType: 'video/webm' };
     this.recordedBlobs = [];
@@ -50,7 +81,7 @@ class Recorder_Web {
             'Try Firefox 29 or later, or Chrome 47 or later, ' +
             'with Enable experimental Web Platform features enabled from chrome://flags.');
           console.error('Exception while creating MediaRecorder:', e2);
-          return;
+          return false;
         }
       }
     }
@@ -60,7 +91,7 @@ class Recorder_Web {
     // downloadButton.disabled = true;
     mediaRecorder.onstop = (event) => {
       console.log('Recorder stopped: ', event);
-      const superBuffer = new Blob(this.recordedBlobs, { type: 'video/webm' });
+      // const superBuffer = new Blob(this.recordedBlobs, { type: 'video/webm' });
     }
     mediaRecorder.ondataavailable = (event) => {
       if (event.data && event.data.size > 0) {
@@ -68,12 +99,13 @@ class Recorder_Web {
       }
     };
     mediaRecorder.start(100); // collect 100ms of data
-    console.log('MediaRecorder started', mediaRecorder);
-
+    console.log('MediaRecorder started');
+    this.recording = true
+    return true;
   }
   stopRecording() {
     mediaRecorder.stop();
-    console.log('Recorded Blobs: ', this.recordedBlobs);
+    console.log('Recorded Blobs length: ', this.recordedBlobs.length);
     // video.controls = true;
   }
 
@@ -97,25 +129,12 @@ class Recorder_Web {
     this.download()
   }
 
-  connectWebSocket(server, success_callback) {    
-    console.log("Connecting to " + server)
-    const socket = io.connect(server, {
-      reconnectionAttempts: 3
-    })      
-    this.socket = socket;
-    socket.on("connect", () => {
-      console.log("Connected to %s : socket id : %s", server, socket.id)
-      if(success_callback) {
-        success_callback()
-      }
-    })
-  }
 
-  capture(sketch_name, caption, canvas_id = 'defaultCanvas0') {
+  captureImage(sketch_name, caption, canvas_id = 'defaultCanvas0') {
     console.log("Capturing Canvas.")
-    const canvas = document.getElementById(canvas_id);
-
+    
     if(this.socket.connected) {
+      const canvas = document.getElementById(canvas_id);
       canvas.toBlob((blob) => {
         console.log("Sending image.")
         let data = {
@@ -130,16 +149,8 @@ class Recorder_Web {
       }, 'image/jpeg')  
     } else {
       console.log("Socket not connected, downloading image locally.")
-      var link = document.createElement('a')
-      link.download = sketch_name + ".jpeg"
-      link.href = canvas.toDataURL('image/jpeg')
-      link.click()  
+      this.downloadImage(sketch_name + ".jpeg")
     }
-  }
-
-  repost() {
-    console.log("Post to IG")
-    this.socket.emit('repost')
   }
 
   downloadImage(filename) {
