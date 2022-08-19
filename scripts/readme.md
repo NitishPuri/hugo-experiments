@@ -21,7 +21,7 @@
 
 ### Config
 Expected in a file in `keys/config.js`
-```JSON
+```js
 module.exports =  {
     facebook : {
         pages : {
