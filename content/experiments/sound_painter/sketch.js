@@ -8,6 +8,7 @@ function preload() {
     maxim = new Maxim()
     atmos = maxim.loadFile(resolveUrl('/data/sounds/atmos1.wav'))
     bells = maxim.loadFile(resolveUrl('/data/sounds/bells.wav'))
+
 }
 
 let params = {
@@ -20,8 +21,16 @@ let params = {
     brush7: true
 }
 
+function connectRecorder() {
+    console.log(document.recorder)
+    document.recorder.connectAudioNode(atmos.getLastNode())
+    document.recorder.connectAudioNode(bells.getLastNode())
+}
+
 function setup() {
     var cnv = createCanvasCustom();
+
+    // atmos.getLastNode().connect(document.recorder)
     
     atmos.setLooping(true)
     bells.setLooping(true)

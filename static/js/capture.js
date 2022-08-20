@@ -63,42 +63,46 @@ class Recorder_Web {
         this.recording = false;
         console.log("Canvas stream destroyed.");
     }
-    
-    createAudioCaptureStream() {
-        const audio_context = new window.AudioContext() // do i need to capture the same context here ??
-        // Example :: https://developer.mozilla.org/en-US/docs/Web/API/AudioContext/createMediaStreamDestination
-        const dest = audio_context.createMediaStreamDestination()
-        this.audio_stream = dest.stream        
-        // need to connect input audio to stream ????        
-    }
 
+    stream_dest = false;
+    connectAudioNode(audio_node) {
+        if(this.stream_dest == false) {
+            // const audio_context = new window.AudioContext() // do i need to capture the same context here ??
+            // Example :: https://developer.mozilla.org/en-US/docs/Web/API/AudioContext/createMediaStreamDestination
+            this.stream_dest = context.createMediaStreamDestination()
+        }
+        console.log("Connected to node :: ", audio_node);
+        audio_node.connect(this.stream_dest)
+    }
+    
     combineStreams() {
         https://stackoverflow.com/questions/52768330/combine-audio-and-video-streams-into-one-file-with-mediarecorder
-        return new MediaStream([...this.canvas_stream.getTracks(), ...this.audio_stream.getTracks()])
+        return new MediaStream([...this.canvas_stream.getVideoTracks(), ...this.stream_dest.stream.getAudioTracks()])
     }
     
     start() {
         if(this.stream_created == false) {
             this.createCanvasCaptureStream()
-            this.createAudioCaptureStream()
         }
         
         console.log("Recorder started.")
-        let options = { mimeType: 'video/webm' };
+        // let options = { mimeType: 'video/webm' };
+        let options = { mimeType: 'video/webm; codecs=opus,vp8' };
         this.recordedBlobs = [];
-        let combined_stream = this.combineStreams();
+        let recording_stream = this.combineStreams();
+        // let recording_stream = this.canvas_stream
         try {
-            mediaRecorder = new MediaRecorder(this.canvas_stream, options);
+            mediaRecorder = new MediaRecorder(recording_stream);
         } catch (e0) {
-            console.log('Unable to create MediaRecorder with options Object: ', e0);
+            console.log('Unable to create MediaRecorder with options ', options);
             try {
                 options = { mimeType: 'video/webm,codecs=vp9' };
-                mediaRecorder = new MediaRecorder(combined_stream, options);
+                mediaRecorder = new MediaRecorder(recording_stream, options);
             } catch (e1) {
-                console.log('Unable to create MediaRecorder with options Object: ', e1);
+                console.log('Unable to create MediaRecorder with options : ', options);
                 try {
                     options = 'video/vp8'; // Chrome 47
-                    mediaRecorder = new MediaRecorder(combined_stream, options);
+                    mediaRecorder = new MediaRecorder(recording_stream, options);
                 } catch (e2) {
                     alert('MediaRecorder is not supported by this browser.\n\n' +
                     'Try Firefox 29 or later, or Chrome 47 or later, ' +
