@@ -16,6 +16,7 @@ function callback(fn) {
 }
 
 class AWSUtil {
+    // https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/javascript/example_code
     // Create S3 service object  231536
     s3 = new AWS.S3({apiVersion: '2006-03-01'});
     

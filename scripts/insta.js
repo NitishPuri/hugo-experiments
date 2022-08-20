@@ -34,24 +34,57 @@ class FB {
     getAccounts = () => this.get(`${fb_config.userId}/accounts`)
     getInstagramId = (pageId) => this.getNode(pageId, 'name,instagram_business_account')
 
-    async createIGMedia(ig_user_id, imageURL, caption) {
+    async createIGMedia(ig_user_id, params) {
         const containerCreationURL =  `${this.base_url + ig_user_id}/media`;
-        console.log(imageURL)
         console.log(containerCreationURL)
+        console.log(params)
+
+        params.access_token = fb_config.accessToken
         try {
-            const response = await axios.post(containerCreationURL, {
-                image_url: imageURL,
-                access_token: fb_config.accessToken,
-                caption: caption
-            });
+            const response = await axios.post(containerCreationURL, params);
             console.log(`Response from : ${containerCreationURL} : ${response.status}`)            
             console.log(`IG Media Container ID : ${response.data.id}`)
             return response.data.id;
         } catch (error) {
             console.error(error);
         }
-    }   
+    }
+    
+    async createIGImageMedia(ig_user_id, imageURL, caption) {
+        return this.createIGMedia(ig_user_id, {
+            image_url: imageURL,            
+            caption: caption
+        })
+    }
 
+    async createIGVideoMedia(ig_user_id, video_url, caption, is_reel = false) {
+        return this.createIGMedia(ig_user_id, {
+            media_type: (is_reel ? 'REELS' : 'VIDEO'),
+            video_url: video_url,            
+            caption: caption,
+            thumb_offset: 1
+        })
+    }
+
+    async verifyIGVideoContainer(container_id) {
+        // https://developers.facebook.com/docs/instagram-api/reference/ig-user/media#response
+        // https://developers.facebook.com/docs/instagram-api/reference/ig-container
+        // TODO: Also add `status` to check the reason of failure. https://developers.facebook.com/docs/instagram-api/reference/error-codes#error-codes
+        const verifyURL = `${this.base_url + container_id}`;
+        const verifyURLWithParams = `${verifyURL}?fields=status,status_code&access_token=${fb_config.accessToken}`
+
+        try {
+            const response = await axios.get(verifyURLWithParams);
+            console.log(`Response from : ${verifyURL} : ${response.status}`)            
+            console.log(`Verification Status : ${response.data.status_code}`)            
+            return { status_code : response.data.status_code, status: response.data.status };
+        } catch (error) {
+            console.error(error);
+        }
+
+        return false
+    }
+    
     async publishIGmedia(ig_user_id, creation_id) {
         // https://developers.facebook.com/docs/instagram-api/reference/ig-user/media#creating
         const publishURL = `${this.base_url + ig_user_id}/media_publish`;
@@ -123,7 +156,23 @@ class FB {
             console.log(`Posted photo to page [${fb_page.id}] with status [${response.status}] `)
             console.log(`Post id : [${response.data.post_id}]`)
             console.log(`Photo id : [${response.data.id}]`)
-            return response.data;
+            return response.data.id;
+        } catch (error) {
+            console.error(error);
+        }
+    }
+
+    async publishFBVideo(fb_page, video_url) {
+        // https://developers.facebook.com/docs/pages/publishing/#publish-a-video
+        const page_post_url = `${this.base_url + fb_page.id}/videos`
+        try {
+            const response = await axios.post(page_post_url, {
+                access_token: fb_page.token,
+                file_url: video_url                
+            })
+            console.log(`Posted video to page [${fb_page.id}] with status [${response.status}] `)
+            console.log(`Video id : [${response.data.id}]`)
+            return response.data.id;
         } catch (error) {
             console.error(error);
         }

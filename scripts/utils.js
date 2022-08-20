@@ -1,6 +1,9 @@
 const fs = require('fs');
-const { resolve } = require('path');
 const sharp =  require('sharp');
+
+function delay(number) { 
+    return new Promise(resolve => setTimeout(resolve, number) ) 
+}
 
 function saveFile(filename, base64data) {
     let tempdir = 'temp'
@@ -145,4 +148,4 @@ async function processVideo (filepath) {
 
 }
 
-module.exports = {saveFile, processImage, processVideo}
+module.exports = {saveFile, processImage, processVideo, delay}

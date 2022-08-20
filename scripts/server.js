@@ -7,8 +7,7 @@ const { FB } = require('./insta');
 const { Twitter } = require('./twitter');
 const { GCS } = require('./gcs');
 const { AWSUtil } = require('./aws');
-const {processImage, saveFile, processVideo} = require('./image_utils')
-
+const {processImage, saveFile, processVideo, delay} = require('./utils');
 
 
 const fb = new FB;
@@ -67,7 +66,7 @@ io.sockets.on('connection', (connection) => {
         }
         
         if(media_url) {
-            const ig_creation_id = await fb.createIGMedia(fb.insta.ccStudio, media_url, data.caption);
+            const ig_creation_id = await fb.createIGImageMedia(fb.insta.ccStudio, media_url, data.caption);
             console.log("Media Created :: ", ig_creation_id)
             const publish_id = await fb.publishIGmedia(fb.insta.ccStudio, ig_creation_id);
             console.log("Media Published :: ", publish_id)
@@ -101,17 +100,37 @@ io.sockets.on('connection', (connection) => {
         }
 
         if(media_url) {
-            const ig_creation_id = await fb.createIGMedia(fb.insta.ccStudio, media_url, data.caption);
+            const ig_creation_id = await fb.createIGVideoMedia(fb.insta.ccStudio, media_url, data.caption);
             console.log("Media Created :: ", ig_creation_id)
-            const publish_id = await fb.publishIGmedia(fb.insta.ccStudio, ig_creation_id);
-            console.log("Media Published :: ", publish_id)
-            
-            // const fb_post = await fb.publishFBPhoto(fb.pages.ccStudio, media_url);
-            // fb.postFBPostComment(fb.pages.ccStudio, fb_post.post_id, data.caption)              
-        }
+
+            // Wait till upload finishes.
+            let upload_success = false
+            while(true) {
+                const upload_status = await fb.verifyIGVideoContainer(ig_creation_id)
+                if(upload_status.status_code == 'FINISHED ') {
+                    console.log("Upload finished :: ", ig_creation_id)
+                    upload_success = true;
+                    break;
+                }
+                if(upload_status.status_code == 'ERROR') {
+                    console.log("Upload error :: ", ig_creation_id)
+                    console.log(upload_status.status)
+                    upload_success = false;
+                    break;
+                }
+                await delay(1000)
+            }
 
             // post to insta,
+            if(upload_success) {
+                const publish_id = await fb.publishIGmedia(fb.insta.ccStudio, ig_creation_id);
+                console.log("Media Published :: ", publish_id)    
+            }
+            
             // post to fb page
+            const fb_post = await fb.publishFBVideo(fb.pages.ccStudio, media_url);
+            fb.postFBPostComment(fb.pages.ccStudio, fb_post, data.caption)              
+        }
 
     })    
 })
