@@ -55,32 +55,50 @@ class Recorder_Web {
         this.stream_created = true
         this.recording = false
     }
+
+    destroyCanvasCaptureStream() {
+        this.recordedBlobs = []
+        this.stream_created = false;
+        this.canvas_stream = 'undefined'
+        this.recording = false;
+        console.log("Canvas stream destroyed.");
+    }
     
     createAudioCaptureStream() {
-        
-        
+        const audio_context = new window.AudioContext() // do i need to capture the same context here ??
+        // Example :: https://developer.mozilla.org/en-US/docs/Web/API/AudioContext/createMediaStreamDestination
+        const dest = audio_context.createMediaStreamDestination()
+        this.audio_stream = dest.stream        
+        // need to connect input audio to stream ????        
+    }
+
+    combineStreams() {
+        https://stackoverflow.com/questions/52768330/combine-audio-and-video-streams-into-one-file-with-mediarecorder
+        return new MediaStream([...this.canvas_stream.getTracks(), ...this.audio_stream.getTracks()])
     }
     
     start() {
         if(this.stream_created == false) {
             this.createCanvasCaptureStream()
+            this.createAudioCaptureStream()
         }
         
         console.log("Recorder started.")
         let options = { mimeType: 'video/webm' };
         this.recordedBlobs = [];
+        let combined_stream = this.combineStreams();
         try {
             mediaRecorder = new MediaRecorder(this.canvas_stream, options);
         } catch (e0) {
             console.log('Unable to create MediaRecorder with options Object: ', e0);
             try {
                 options = { mimeType: 'video/webm,codecs=vp9' };
-                mediaRecorder = new MediaRecorder(stream, options);
+                mediaRecorder = new MediaRecorder(combined_stream, options);
             } catch (e1) {
                 console.log('Unable to create MediaRecorder with options Object: ', e1);
                 try {
                     options = 'video/vp8'; // Chrome 47
-                    mediaRecorder = new MediaRecorder(stream, options);
+                    mediaRecorder = new MediaRecorder(combined_stream, options);
                 } catch (e2) {
                     alert('MediaRecorder is not supported by this browser.\n\n' +
                     'Try Firefox 29 or later, or Chrome 47 or later, ' +
