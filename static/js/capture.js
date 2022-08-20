@@ -74,12 +74,7 @@ class Recorder_Web {
         console.log("Connected to node :: ", audio_node);
         audio_node.connect(this.stream_dest)
     }
-    
-    combineStreams() {
-        https://stackoverflow.com/questions/52768330/combine-audio-and-video-streams-into-one-file-with-mediarecorder
-        return new MediaStream([...this.canvas_stream.getVideoTracks(), ...this.stream_dest.stream.getAudioTracks()])
-    }
-    
+        
     start() {
         if(this.stream_created == false) {
             this.createCanvasCaptureStream()
@@ -89,8 +84,14 @@ class Recorder_Web {
         // let options = { mimeType: 'video/webm' };
         let options = { mimeType: 'video/webm; codecs=opus,vp8' };
         this.recordedBlobs = [];
-        let recording_stream = this.combineStreams();
-        // let recording_stream = this.canvas_stream
+        
+        let recording_stream = this.canvas_stream;
+        if(this.stream_dest != false) {
+            // Combine audio and video streams
+            https://stackoverflow.com/questions/52768330/combine-audio-and-video-streams-into-one-file-with-mediarecorder
+            recording_stream = new MediaStream([...this.canvas_stream.getVideoTracks(), ...this.stream_dest.stream.getAudioTracks()])
+        }
+
         try {
             mediaRecorder = new MediaRecorder(recording_stream);
         } catch (e0) {

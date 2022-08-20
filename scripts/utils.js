@@ -12,7 +12,7 @@ function saveFile(filename, base64data) {
         fs.mkdirSync(tempdir)
     }
     var filepath = `${tempdir}/${filename}`
-    fs.writeFileSync(filepath, imageData, 'base64')
+    fs.writeFileSync(filepath, base64data, 'base64')
     console.log(`File saved as : ${filepath}`)
     return filepath;
 }

@@ -17,7 +17,8 @@
   },
   "scripts": {
     "test": "node scripts/moduleTest.js",
-    "start": "nodemon scripts/server.js",
+    "start": "npm run server",
+    "server": "nodemon scripts/server.js",
     "site": "hugo server --buildDrafts --disableFastRender",
     "local_dev": "python -m http.server"
   },

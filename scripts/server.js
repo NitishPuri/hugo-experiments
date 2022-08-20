@@ -84,7 +84,7 @@ io.sockets.on('connection', (connection) => {
         console.log("Sketch Name: ", data.sketch_name)
 
         // process video
-        var filename = saveFile(`${data.sketch_name}.webm`, data.videoData)
+        var filepath = saveFile(`${data.sketch_name}.webm`, data.videoData)
         filepath = await processVideo(filepath)
 
         // tweet
