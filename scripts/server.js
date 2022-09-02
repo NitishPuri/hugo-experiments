@@ -33,6 +33,54 @@ var io = socket(server, {
     maxHttpBufferSize: 1e8
 });
 
+function uploadVideo(filepath, caption) {
+    // tweet
+    const tweet_id = await twitter.tweetMedia(caption, filepath)
+    
+    // upload to cloud 
+    const use_gcs = false;
+    var media_url = ""
+    if (use_gcs) {
+        media_url = await gcs.uploadFileGCS(filepath, filename);
+    } else {
+        media_url = await aws.upload('nit-gen-bucket', filepath);
+    }
+    
+    if(media_url) {
+        const ig_creation_id = await fb.createIGVideoMedia(fb.insta.ccStudio, media_url, caption);
+        console.log("Media Created :: ", ig_creation_id)
+        
+        // Wait till upload finishes.
+        let upload_success = false
+        while(true) {
+            const upload_status = await fb.verifyIGVideoContainer(ig_creation_id)
+            if(upload_status.status_code == 'FINISHED ') {
+                console.log("Upload finished :: ", ig_creation_id)
+                upload_success = true;
+                break;
+            }
+            if(upload_status.status_code == 'ERROR') {
+                console.log("Upload error :: ", ig_creation_id)
+                console.log(upload_status.status)
+                upload_success = false;
+                break;
+            }
+            await delay(1000)
+        }
+        
+        // post to insta,
+        if(upload_success) {
+            const publish_id = await fb.publishIGmedia(fb.insta.ccStudio, ig_creation_id);
+            console.log("Media Published :: ", publish_id)    
+        }
+        
+        // post to fb page
+        const fb_post = await fb.publishFBVideo(fb.pages.ccStudio, media_url);
+        fb.postFBPostComment(fb.pages.ccStudio, fb_post, data.caption)              
+    }
+    
+}
+
 io.sockets.on('connection', (connection) => {
     console.log(`new connection ${connection.id} from ${connection.handshake.headers.origin}`)
     
@@ -76,62 +124,18 @@ io.sockets.on('connection', (connection) => {
         }
         
     })
-
+    
     connection.on('videoCapture', async (data) => {
         console.log("Received a message : videoCapture")
         console.log("Video size %d MB" , data.size / (1024*1024))
         console.log("Video Caption: ", data.caption)
         console.log("Sketch Name: ", data.sketch_name)
-
+        
         // process video
         var filepath = saveFile(`${data.sketch_name}.webm`, data.videoData)
         filepath = await processVideo(filepath)
-
-        // tweet
-        const tweet_id = await twitter.tweetMedia(data.caption, filepath)
-
-        // upload to cloud 
-        const use_gcs = false;
-        var media_url = ""
-        if (use_gcs) {
-            media_url = await gcs.uploadFileGCS(filepath, filename);
-        } else {
-            media_url = await aws.upload('nit-gen-bucket', filepath);
-        }
-
-        if(media_url) {
-            const ig_creation_id = await fb.createIGVideoMedia(fb.insta.ccStudio, media_url, data.caption);
-            console.log("Media Created :: ", ig_creation_id)
-
-            // Wait till upload finishes.
-            let upload_success = false
-            while(true) {
-                const upload_status = await fb.verifyIGVideoContainer(ig_creation_id)
-                if(upload_status.status_code == 'FINISHED ') {
-                    console.log("Upload finished :: ", ig_creation_id)
-                    upload_success = true;
-                    break;
-                }
-                if(upload_status.status_code == 'ERROR') {
-                    console.log("Upload error :: ", ig_creation_id)
-                    console.log(upload_status.status)
-                    upload_success = false;
-                    break;
-                }
-                await delay(1000)
-            }
-
-            // post to insta,
-            if(upload_success) {
-                const publish_id = await fb.publishIGmedia(fb.insta.ccStudio, ig_creation_id);
-                console.log("Media Published :: ", publish_id)    
-            }
-            
-            // post to fb page
-            const fb_post = await fb.publishFBVideo(fb.pages.ccStudio, media_url);
-            fb.postFBPostComment(fb.pages.ccStudio, fb_post, data.caption)              
-        }
-
+        
+        uploadVideo(filepath, data.caption)
     })    
 })
 
